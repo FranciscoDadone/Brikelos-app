@@ -20,16 +20,33 @@ public class MainGUI extends JFrame {
         this.pack();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("./../images/logo.png")));
-
+        contentPanel = new JPanel();
+        mainPanel.add(contentPanel);
         this.setVisible(true);
 
-        AGREGARVENTAButton.addActionListener(e -> {
 
+        /**
+         * Triggered when clicked on 'AGREGAR VENTA'
+         */
+        AGREGARVENTAButton.addActionListener(e -> {
+            Handler.agregarVenta(contentPanel);
         });
+
+        /**
+         * Triggered when clicked on 'VER CLIENTES'
+         */
         VERCLIENTESButton.addActionListener(e -> {
 
+
+
         });
+
+        /**
+         * Triggered when clicked on 'NUEVO CLIENTE'
+         */
         NUEVOCLIENTEButton.addActionListener(e -> {
+
+
 
         });
     }
