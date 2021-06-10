@@ -37,7 +37,7 @@ public class MainGUI extends JFrame {
          * Triggered when clicked on 'VER CLIENTES'
          */
         VERCLIENTESButton.addActionListener(e -> {
-//            Handler.changeScreen(contentPanel, new AgregarVentaPanel().getPanel());
+            Handler.changeScreen(contentPanel, new VerClientesPanel().getPanel());
         });
 
         /**
