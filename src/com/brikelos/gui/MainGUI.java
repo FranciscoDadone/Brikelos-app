@@ -21,33 +21,30 @@ public class MainGUI extends JFrame {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("./../images/logo.png")));
         contentPanel = new JPanel();
-        mainPanel.add(contentPanel);
+        mainPanel.add(new JScrollPane(contentPanel));
         this.setVisible(true);
+        Handler.changeScreen(contentPanel, new AgregarVentaPanel().getPanel());
 
 
         /**
          * Triggered when clicked on 'AGREGAR VENTA'
          */
         AGREGARVENTAButton.addActionListener(e -> {
-            Handler.agregarVenta(contentPanel);
+            Handler.changeScreen(contentPanel, new AgregarVentaPanel().getPanel());
         });
 
         /**
          * Triggered when clicked on 'VER CLIENTES'
          */
         VERCLIENTESButton.addActionListener(e -> {
-
-
-
+//            Handler.changeScreen(contentPanel, new AgregarVentaPanel().getPanel());
         });
 
         /**
          * Triggered when clicked on 'NUEVO CLIENTE'
          */
         NUEVOCLIENTEButton.addActionListener(e -> {
-
-
-
+            Handler.changeScreen(contentPanel, new AgregarClientePanel().getPanel());
         });
     }
 }

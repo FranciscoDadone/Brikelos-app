@@ -1,14 +1,12 @@
 package com.brikelos.gui;
 
-import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
+
+import org.jdesktop.swingx.prompt.PromptSupport;
 
 import javax.swing.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.*;
+import java.awt.event.*;
 import java.util.ArrayList;
-import java.util.Locale;
 
 public class AgregarVentaPanel {
 
@@ -18,24 +16,45 @@ public class AgregarVentaPanel {
 
         this.bindData();
 
-        textField1.addKeyListener(new KeyAdapter() {
+        /**
+         * Puts style to the client search.
+         */
+        PromptSupport.setPrompt("Buscar cliente...", buscarCliente);
+        buscarCliente.setFont(new Font("Arial", Font.PLAIN, 20));
+
+
+        buscarCliente.addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent e) {
                 super.keyReleased(e);
-                searchFilter(textField1.getText());
+                searchFilter(buscarCliente.getText());
             }
         });
-        list1.addMouseListener(new MouseAdapter() {
+        listadoClientes.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                System.out.println(list1.getSelectedValue());
+                System.out.println(listadoClientes.getSelectedValue());
             }
+        });
+
+        guardarButton.addActionListener(e -> {
+
         });
     }
 
     private ArrayList getStars() {
         ArrayList stars = new ArrayList();
+        stars.add("hola");
+        stars.add("mundo");
+        stars.add("dos");
+        stars.add("tres");
+        stars.add("cuatro");
+        stars.add("hola");
+        stars.add("mundo");
+        stars.add("dos");
+        stars.add("tres");
+        stars.add("cuatro");
         stars.add("hola");
         stars.add("mundo");
         stars.add("dos");
@@ -50,8 +69,8 @@ public class AgregarVentaPanel {
         getStars().stream().forEach((star) -> {
             defaultListModel.addElement(star);
         });
-        list1.setModel(defaultListModel);
-        list1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        listadoClientes.setModel(defaultListModel);
+        listadoClientes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
 
@@ -67,7 +86,7 @@ public class AgregarVentaPanel {
 
         });
         defaultListModel = filteredItems;
-        list1.setModel(defaultListModel);
+        listadoClientes.setModel(defaultListModel);
     }
 
     JPanel getPanel() {
@@ -75,6 +94,11 @@ public class AgregarVentaPanel {
     }
 
     private JPanel panel;
-    private JList list1;
+    private JList listadoClientes;
+    private JTextField buscarCliente;
     private JTextField textField1;
+    private JTextField tituloVenta;
+    private JTextArea descripcionVenta;
+    private JButton guardarButton;
+    private JTextField textField2;
 }

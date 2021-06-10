@@ -21,7 +21,7 @@
             <properties>
               <font name="Courier 10 Pitch" size="48" style="1"/>
               <foreground color="-1"/>
-              <text value="Brikelos librería   -   gestión de clientes"/>
+              <text value="Brikelos librería"/>
             </properties>
           </component>
         </children>

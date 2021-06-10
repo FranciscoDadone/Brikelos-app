@@ -8,12 +8,10 @@ public class Handler {
         new MainGUI("Brikelos");
     }
 
-    public static void agregarVenta(JPanel panel) {
-
-        panel.add(new AgregarVentaPanel().getPanel());
+    public static void changeScreen(JPanel panel, JPanel newScreen) {
+        panel.removeAll();
+        panel.add(newScreen);
         panel.revalidate();
         panel.repaint();
-
     }
-
 }
