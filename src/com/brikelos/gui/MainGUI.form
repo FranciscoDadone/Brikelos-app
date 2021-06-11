@@ -9,7 +9,7 @@
     </properties>
     <border type="none"/>
     <children>
-      <grid id="1be0f" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+      <grid id="1be0f" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="0">
         <constraints border-constraint="North"/>
         <properties>
           <background color="-8677648"/>
@@ -21,7 +21,7 @@
             <properties>
               <font name="Courier 10 Pitch" size="48" style="1"/>
               <foreground color="-1"/>
-              <text value="Brikelos librería"/>
+              <text value="Brikelos"/>
             </properties>
           </component>
         </children>

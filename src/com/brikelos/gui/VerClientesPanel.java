@@ -1,6 +1,6 @@
 package com.brikelos.gui;
 
-import com.brikelos.panel.JCompra;
+import com.brikelos.templates.JCompra;
 import org.jdesktop.swingx.prompt.PromptSupport;
 
 import javax.swing.*;
@@ -45,17 +45,11 @@ public class VerClientesPanel {
             }
         });
 
-
         panelCompra.setLayout(new BoxLayout(panelCompra, BoxLayout.PAGE_AXIS));
 
         for(int i = 0; i < 20; i++) {
-            panelCompra.add(new JCompra("Francisco Dadone", "43614123", "+542954465433", "dadonefran@gmail.com"));
-
+            panelCompra.add(new JCompra(0, "10/10/2021", "Los enanitos verdes", "A JLabel object can display either text, an image, or both. You can specify where in the label's display area the label's contents are aligned by setting the vertical and horizontal alignment. By default, labels are vertically centered in their display area. Text-only labels are leading edge aligned, by default; image-only labels are horizontally centered, by default.", 1000));
         }
-
-
-
-
     }
 
     private ArrayList getStars() {

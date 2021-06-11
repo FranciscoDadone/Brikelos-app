@@ -85,7 +85,7 @@
           </scrollpane>
         </children>
       </grid>
-      <grid id="9576b" layout-manager="GridBagLayout">
+      <grid id="9576b" layout-manager="BorderLayout" hgap="0" vgap="0">
         <constraints>
           <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
           <gridbag weightx="0.0" weighty="0.0"/>
@@ -93,24 +93,38 @@
         <properties/>
         <border type="none"/>
         <children>
-          <vspacer id="65443">
-            <constraints>
-              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
-              <gridbag weightx="0.0" weighty="25.0"/>
-            </constraints>
-          </vspacer>
-          <hspacer id="da135">
-            <constraints>
-              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-              <gridbag weightx="0.0" weighty="0.0"/>
-            </constraints>
-          </hspacer>
-          <vspacer id="c9e14">
-            <constraints>
-              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
-              <gridbag weightx="0.0" weighty="0.0"/>
-            </constraints>
-          </vspacer>
+          <component id="79ae7" class="javax.swing.JLabel">
+            <constraints border-constraint="Center"/>
+            <properties>
+              <font size="24"/>
+              <text value="Datos del cliente"/>
+            </properties>
+          </component>
+          <grid id="8891d" layout-manager="GridBagLayout">
+            <constraints border-constraint="North"/>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <vspacer id="da756">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="0.0" weighty="0.0"/>
+                </constraints>
+              </vspacer>
+              <hspacer id="f3e29">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="0.0" weighty="0.0"/>
+                </constraints>
+              </hspacer>
+              <vspacer id="5d540">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="0.0" weighty="0.0"/>
+                </constraints>
+              </vspacer>
+            </children>
+          </grid>
         </children>
       </grid>
       <grid id="dff0c" layout-manager="GridBagLayout">
@@ -128,6 +142,8 @@
             </constraints>
             <properties>
               <font size="20"/>
+              <horizontalAlignment value="2"/>
+              <horizontalTextPosition value="2"/>
               <text value="Nombre: Francisco Dadone"/>
             </properties>
           </component>
@@ -138,6 +154,8 @@
             </constraints>
             <properties>
               <font size="20"/>
+              <horizontalAlignment value="2"/>
+              <horizontalTextPosition value="2"/>
               <text value="DNI: 43614123"/>
             </properties>
           </component>
@@ -148,6 +166,8 @@
             </constraints>
             <properties>
               <font size="20"/>
+              <horizontalAlignment value="2"/>
+              <horizontalTextPosition value="2"/>
               <text value="Teléfono: 000000"/>
             </properties>
           </component>
@@ -158,12 +178,26 @@
             </constraints>
             <properties>
               <font size="20"/>
+              <horizontalAlignment value="2"/>
+              <horizontalTextPosition value="2"/>
               <text value="Email: dadonefrancisco@hotmail.com.ar"/>
+            </properties>
+          </component>
+          <component id="2091b" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <gridbag weightx="0.0" weighty="0.0"/>
+            </constraints>
+            <properties>
+              <font size="20"/>
+              <horizontalAlignment value="2"/>
+              <horizontalTextPosition value="2"/>
+              <text value="Total gastado: $1000"/>
             </properties>
           </component>
         </children>
       </grid>
-      <grid id="180af" layout-manager="GridBagLayout">
+      <grid id="180af" layout-manager="BorderLayout" hgap="0" vgap="0">
         <constraints>
           <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
           <gridbag weightx="0.0" weighty="0.0"/>
@@ -171,42 +205,61 @@
         <properties/>
         <border type="none"/>
         <children>
-          <vspacer id="a53d9">
-            <constraints>
-              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
-              <gridbag weightx="0.0" weighty="25.0"/>
-            </constraints>
-          </vspacer>
-          <hspacer id="737a0">
-            <constraints>
-              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-              <gridbag weightx="0.0" weighty="0.0"/>
-            </constraints>
-          </hspacer>
-          <vspacer id="e640a">
-            <constraints>
-              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
-              <gridbag weightx="0.0" weighty="0.0"/>
-            </constraints>
-          </vspacer>
+          <component id="46542" class="javax.swing.JLabel">
+            <constraints border-constraint="Center"/>
+            <properties>
+              <font size="24"/>
+              <text value="Compras realizadas"/>
+            </properties>
+          </component>
+          <grid id="dd2bf" layout-manager="GridBagLayout">
+            <constraints border-constraint="North"/>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <vspacer id="9dfba">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="0.0" weighty="0.0"/>
+                </constraints>
+              </vspacer>
+              <hspacer id="e9d47">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="0.0" weighty="0.0"/>
+                </constraints>
+              </hspacer>
+              <vspacer id="a7c80">
+                <constraints>
+                  <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="0.0" weighty="0.0"/>
+                </constraints>
+              </vspacer>
+              <vspacer id="6249">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="0.0" weighty="0.0"/>
+                </constraints>
+              </vspacer>
+              <vspacer id="e38ea">
+                <constraints>
+                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="0.0" weighty="0.0"/>
+                </constraints>
+              </vspacer>
+            </children>
+          </grid>
         </children>
       </grid>
-      <scrollpane id="fb5a7">
+      <grid id="bc20e" binding="panelCompra" layout-manager="GridBagLayout">
         <constraints>
-          <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
           <gridbag weightx="0.0" weighty="0.0"/>
         </constraints>
         <properties/>
-        <border type="none"/>
-        <children>
-          <grid id="c68f9" binding="panelCompra" layout-manager="CardLayout" hgap="0" vgap="0">
-            <constraints/>
-            <properties/>
-            <border type="none"/>
-            <children/>
-          </grid>
-        </children>
-      </scrollpane>
+        <border type="none" title="Compras"/>
+        <children/>
+      </grid>
     </children>
   </grid>
 </form>
