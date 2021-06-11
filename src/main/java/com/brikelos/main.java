@@ -7,7 +7,7 @@ public class main {
 
     public static void main(String args[]) {
         Handler.main();
-//        DatabaseHandler.createNewDatabase("test.db");
+        new DatabaseHandler().createNewDatabase();
     }
 
 }
