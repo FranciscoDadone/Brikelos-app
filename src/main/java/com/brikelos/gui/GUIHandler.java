@@ -8,10 +8,10 @@ public class GUIHandler {
         new MainGUI("Brikelos");
     }
 
-    public static void changeScreen(JPanel panel, JPanel newScreen) {
-        panel.removeAll();
-        panel.add(newScreen);
-        panel.revalidate();
-        panel.repaint();
+    public static void changeScreen(JPanel newScreen) {
+        MainGUI.getContentPanel().removeAll();
+        MainGUI.getContentPanel().add(newScreen);
+        MainGUI.getContentPanel().revalidate();
+        MainGUI.getContentPanel().repaint();
     }
 }

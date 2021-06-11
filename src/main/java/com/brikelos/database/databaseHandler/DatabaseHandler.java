@@ -48,7 +48,8 @@ public class DatabaseHandler {
                                 "name VARCHAR(255) NOT NULL," +
                                 "dni VARCHAR(255)," +
                                 "phone VARCHAR(50)," +
-                                "email VARCHAR(100)" +
+                                "email VARCHAR(100)," +
+                                "moneySpent INTEGER" +
                                 ");");
             }
 

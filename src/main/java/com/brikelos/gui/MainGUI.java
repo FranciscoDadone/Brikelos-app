@@ -11,7 +11,11 @@ public class MainGUI extends JFrame {
     private JButton AGREGARVENTAButton;
     private JButton VERCLIENTESButton;
     private JPanel sidebar;
-    private JPanel contentPanel;
+    private static JPanel contentPanel;
+
+    public static JPanel getContentPanel() {
+        return contentPanel;
+    }
 
     public MainGUI(String title) {
         super(title);
@@ -31,28 +35,28 @@ public class MainGUI extends JFrame {
         contentPanel = new JPanel();
         mainPanel.add(new JScrollPane(contentPanel));
         this.setVisible(true);
-        GUIHandler.changeScreen(contentPanel, new AgregarVentaPanel().getPanel());
+        GUIHandler.changeScreen(new AgregarVentaPanel().getPanel());
 
 
         /**
          * Triggered when clicked on 'AGREGAR VENTA'
          */
         AGREGARVENTAButton.addActionListener(e -> {
-            GUIHandler.changeScreen(contentPanel, new AgregarVentaPanel().getPanel());
+            GUIHandler.changeScreen(new AgregarVentaPanel().getPanel());
         });
 
         /**
          * Triggered when clicked on 'VER CLIENTES'
          */
         VERCLIENTESButton.addActionListener(e -> {
-            GUIHandler.changeScreen(contentPanel, new VerClientesPanel().getPanel());
+            GUIHandler.changeScreen(new VerClientesPanel().getPanel());
         });
 
         /**
          * Triggered when clicked on 'NUEVO CLIENTE'
          */
         NUEVOCLIENTEButton.addActionListener(e -> {
-            GUIHandler.changeScreen(contentPanel, new AgregarClientePanel().getPanel());
+            GUIHandler.changeScreen(new AgregarClientePanel().getPanel());
         });
     }
 }
