@@ -1,9 +1,7 @@
 package com.brikelos.database.databaseHandler;
 
-import java.sql.Connection;
-import java.sql.DatabaseMetaData;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.io.File;
+import java.sql.*;
 
 public class DatabaseHandler {
 
@@ -16,7 +14,7 @@ public class DatabaseHandler {
             conn = this.connect();
             if (conn != null) {
                 DatabaseMetaData meta = conn.getMetaData();
-                System.out.println("The driver name is " + meta.getDriverName());
+                System.out.println("Driver: " + meta.getDriverName());
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -33,15 +31,30 @@ public class DatabaseHandler {
      * Connect to the database.
      * @return Connection
      */
-    private Connection connect() {
+    public Connection connect() {
         Connection con = null;
-        try  {
-            con = DriverManager.getConnection("jdbc:sqlite:src/main/java/com/brikelos/database/db/sqlite.db");
+        boolean newDatabase = false;
+        try {
+            File theDir = new File("database");
+            if (!theDir.exists()){
+                theDir.mkdirs();
+                newDatabase = true;
+            }
+            con = DriverManager.getConnection("jdbc:sqlite:database/sqlite.db");
+            if(newDatabase) {
+                Statement statement = con.createStatement();
+                statement.execute("CREATE TABLE Clients (" +
+                                "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                                "name VARCHAR(255) NOT NULL," +
+                                "dni VARCHAR(255)," +
+                                "phone VARCHAR(50)," +
+                                "email VARCHAR(100)" +
+                                ");");
+            }
+
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
         return con;
     }
-
-
 }

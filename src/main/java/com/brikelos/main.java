@@ -1,12 +1,12 @@
 package com.brikelos;
 
 import com.brikelos.database.databaseHandler.DatabaseHandler;
-import com.brikelos.gui.Handler;
+import com.brikelos.gui.GUIHandler;
 
 public class main {
 
     public static void main(String args[]) {
-        Handler.main();
+        GUIHandler.main();
         new DatabaseHandler().createNewDatabase();
     }
 

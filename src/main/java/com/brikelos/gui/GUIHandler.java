@@ -2,7 +2,7 @@ package com.brikelos.gui;
 
 import javax.swing.*;
 
-public class Handler {
+public class GUIHandler {
 
     public static void main() {
         new MainGUI("Brikelos");

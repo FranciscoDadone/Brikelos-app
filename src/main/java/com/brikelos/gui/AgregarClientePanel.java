@@ -1,21 +1,32 @@
 package com.brikelos.gui;
 
+import com.brikelos.database.databaseHandler.DatabaseHandler;
+
 import javax.swing.*;
+import java.sql.Connection;
 
 public class AgregarClientePanel {
 
     private JPanel panel;
-    private JTextField textField1;
-    private JTextField textField2;
-    private JTextField textField3;
-    private JTextField textField4;
-    private JButton guardarButton;
+    private JTextField nameAndSurname;
+    private JTextField dni;
+    private JTextField phoneNum;
+    private JTextField email;
+    private JButton saveButton;
 
-    public void AgregarVentaPanel() {
+    public AgregarClientePanel() {
+
+        /**
+         * Triggers when the button is clicked.
+         */
+        saveButton.addActionListener(e -> {
+
+//            Connection connection = new DatabaseHandler().connect();
 
 
-
+        });
     }
+
 
     public JPanel getPanel() {
         return panel;

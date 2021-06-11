@@ -31,28 +31,28 @@ public class MainGUI extends JFrame {
         contentPanel = new JPanel();
         mainPanel.add(new JScrollPane(contentPanel));
         this.setVisible(true);
-        Handler.changeScreen(contentPanel, new AgregarVentaPanel().getPanel());
+        GUIHandler.changeScreen(contentPanel, new AgregarVentaPanel().getPanel());
 
 
         /**
          * Triggered when clicked on 'AGREGAR VENTA'
          */
         AGREGARVENTAButton.addActionListener(e -> {
-            Handler.changeScreen(contentPanel, new AgregarVentaPanel().getPanel());
+            GUIHandler.changeScreen(contentPanel, new AgregarVentaPanel().getPanel());
         });
 
         /**
          * Triggered when clicked on 'VER CLIENTES'
          */
         VERCLIENTESButton.addActionListener(e -> {
-            Handler.changeScreen(contentPanel, new VerClientesPanel().getPanel());
+            GUIHandler.changeScreen(contentPanel, new VerClientesPanel().getPanel());
         });
 
         /**
          * Triggered when clicked on 'NUEVO CLIENTE'
          */
         NUEVOCLIENTEButton.addActionListener(e -> {
-            Handler.changeScreen(contentPanel, new AgregarClientePanel().getPanel());
+            GUIHandler.changeScreen(contentPanel, new AgregarClientePanel().getPanel());
         });
     }
 }
