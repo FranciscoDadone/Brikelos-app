@@ -7,9 +7,9 @@ import java.io.InputStream;
 public class MainGUI extends JFrame {
 
     private JPanel mainPanel;
-    private JButton NUEVOCLIENTEButton;
-    private JButton AGREGARVENTAButton;
-    private JButton VERCLIENTESButton;
+    private JButton newClientButton;
+    private JButton addSellButton;
+    private JButton showClientsButton;
     private JPanel sidebar;
     private static JPanel contentPanel;
 
@@ -35,28 +35,28 @@ public class MainGUI extends JFrame {
         contentPanel = new JPanel();
         mainPanel.add(new JScrollPane(contentPanel));
         this.setVisible(true);
-        GUIHandler.changeScreen(new AgregarVentaPanel().getPanel());
+        GUIHandler.changeScreen(new AddSellPanel().getPanel());
 
 
         /**
          * Triggered when clicked on 'AGREGAR VENTA'
          */
-        AGREGARVENTAButton.addActionListener(e -> {
-            GUIHandler.changeScreen(new AgregarVentaPanel().getPanel());
+        addSellButton.addActionListener(e -> {
+            GUIHandler.changeScreen(new AddSellPanel().getPanel());
         });
 
         /**
          * Triggered when clicked on 'VER CLIENTES'
          */
-        VERCLIENTESButton.addActionListener(e -> {
-            GUIHandler.changeScreen(new VerClientesPanel().getPanel());
+        showClientsButton.addActionListener(e -> {
+            GUIHandler.changeScreen(new ShowClientsPanel().getPanel());
         });
 
         /**
          * Triggered when clicked on 'NUEVO CLIENTE'
          */
-        NUEVOCLIENTEButton.addActionListener(e -> {
-            GUIHandler.changeScreen(new AgregarClientePanel().getPanel());
+        newClientButton.addActionListener(e -> {
+            GUIHandler.changeScreen(new AddClientPanel().getPanel());
         });
     }
 }

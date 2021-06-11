@@ -1,55 +1,46 @@
 package com.brikelos.gui;
 
-import com.brikelos.templates.JCompra;
+
 import org.jdesktop.swingx.prompt.PromptSupport;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.util.ArrayList;
 
-public class VerClientesPanel {
-    private JPanel panel;
-    private JTextField searchClients;
-    private JList listOfClients;
-    private JPanel panelCompra;
+public class AddSellPanel {
 
     DefaultListModel defaultListModel = new DefaultListModel();
 
+    public AddSellPanel() {
 
-    public VerClientesPanel() {
         this.bindData();
 
         /**
          * Puts style to the client search.
          */
-        PromptSupport.setPrompt("Buscar cliente...", searchClients);
-        searchClients.setFont(new Font("Arial", Font.PLAIN, 20));
+        PromptSupport.setPrompt("Buscar cliente...", buscarCliente);
+        buscarCliente.setFont(new Font("Arial", Font.PLAIN, 20));
 
 
-        searchClients.addKeyListener(new KeyAdapter() {
+        buscarCliente.addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent e) {
                 super.keyReleased(e);
-                searchFilter(searchClients.getText());
+                searchFilter(buscarCliente.getText());
             }
         });
-        listOfClients.addMouseListener(new MouseAdapter() {
+        listadoClientes.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                System.out.println(listOfClients.getSelectedValue());
+                System.out.println(listadoClientes.getSelectedValue());
             }
         });
 
-        panelCompra.setLayout(new BoxLayout(panelCompra, BoxLayout.PAGE_AXIS));
+        guardarButton.addActionListener(e -> {
 
-        for(int i = 0; i < 20; i++) {
-            panelCompra.add(new JCompra(0, "10/10/2021", "Los enanitos verdes", "A JLabel object can display either text, an image, or both. You can specify where in the label's display area the label's contents are aligned by setting the vertical and horizontal alignment. By default, labels are vertically centered in their display area. Text-only labels are leading edge aligned, by default; image-only labels are horizontally centered, by default.", 1000));
-        }
+        });
     }
 
     private ArrayList getStars() {
@@ -76,8 +67,8 @@ public class VerClientesPanel {
         getStars().stream().forEach((star) -> {
             defaultListModel.addElement(star);
         });
-        listOfClients.setModel(defaultListModel);
-        listOfClients.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        listadoClientes.setModel(defaultListModel);
+        listadoClientes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
 
@@ -93,13 +84,19 @@ public class VerClientesPanel {
 
         });
         defaultListModel = filteredItems;
-        listOfClients.setModel(defaultListModel);
+        listadoClientes.setModel(defaultListModel);
     }
 
-
-    public JPanel getPanel() {
+    JPanel getPanel() {
         return panel;
     }
 
-
+    private JPanel panel;
+    private JList listadoClientes;
+    private JTextField buscarCliente;
+    private JTextField textField1;
+    private JTextField tituloVenta;
+    private JTextArea descripcionVenta;
+    private JButton guardarButton;
+    private JTextField textField2;
 }

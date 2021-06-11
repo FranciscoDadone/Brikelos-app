@@ -7,7 +7,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class AgregarClientePanel {
+public class AddClientPanel {
 
     private JPanel panel;
     private JTextField nameAndSurname;
@@ -16,7 +16,7 @@ public class AgregarClientePanel {
     private JTextField email;
     private JButton saveButton;
 
-    public AgregarClientePanel() {
+    public AddClientPanel() {
 
         /**
          * Triggers when the button is clicked.
@@ -84,7 +84,7 @@ public class AgregarClientePanel {
                                 e2.printStackTrace();
                             }
                             JOptionPane.showMessageDialog(null, nameAndSurname.getText() + " fue agregado a la lista de clientes.", "", JOptionPane.INFORMATION_MESSAGE);
-                            GUIHandler.changeScreen(new AgregarClientePanel().getPanel());
+                            GUIHandler.changeScreen(new AddClientPanel().getPanel());
                         }
                     }
                 }

@@ -33,7 +33,7 @@
         </properties>
         <border type="none"/>
         <children>
-          <component id="67c0a" class="javax.swing.JButton" binding="NUEVOCLIENTEButton">
+          <component id="67c0a" class="javax.swing.JButton" binding="newClientButton">
             <constraints>
               <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
               <gridbag top="10" left="0" bottom="0" right="0" weightx="0.0" weighty="0.0" ipadx="2" ipady="20"/>
@@ -51,7 +51,7 @@
               <text value="NUEVO CLIENTE"/>
             </properties>
           </component>
-          <component id="64b1f" class="javax.swing.JButton" binding="VERCLIENTESButton" default-binding="true">
+          <component id="64b1f" class="javax.swing.JButton" binding="showClientsButton">
             <constraints>
               <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
               <gridbag top="10" left="0" bottom="0" right="0" weightx="0.0" weighty="0.0" ipadx="2" ipady="20"/>
@@ -64,7 +64,7 @@
               <text value="VER CLIENTES"/>
             </properties>
           </component>
-          <component id="17e06" class="javax.swing.JButton" binding="AGREGARVENTAButton" default-binding="true">
+          <component id="17e06" class="javax.swing.JButton" binding="addSellButton">
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
               <gridbag top="10" left="0" bottom="0" right="0" weightx="0.0" weighty="0.0" ipadx="2" ipady="20"/>
