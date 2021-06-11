@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="com.brikelos.gui.MainGUI">
+  <grid id="27dc6" binding="mainPanel" layout-manager="BorderLayout" hgap="0" vgap="0">
+    <constraints>
+      <xy x="20" y="20" width="1662" height="2072"/>
+    </constraints>
+    <properties>
+      <background color="-2960686"/>
+    </properties>
+    <border type="none"/>
+    <children>
+      <grid id="1be0f" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="0">
+        <constraints border-constraint="North"/>
+        <properties>
+          <background color="-8677648"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <component id="8c70e" class="javax.swing.JLabel">
+            <constraints/>
+            <properties>
+              <font name="Courier 10 Pitch" size="48" style="1"/>
+              <foreground color="-1"/>
+              <text value="Brikelos"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <grid id="51e24" binding="sidebar" layout-manager="GridBagLayout">
+        <constraints border-constraint="West"/>
+        <properties>
+          <background color="-8677648"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <component id="67c0a" class="javax.swing.JButton" binding="NUEVOCLIENTEButton">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <gridbag top="10" left="0" bottom="0" right="0" weightx="0.0" weighty="0.0" ipadx="2" ipady="20"/>
+            </constraints>
+            <properties>
+              <autoscrolls value="false"/>
+              <background color="-1"/>
+              <borderPainted value="false"/>
+              <contentAreaFilled value="true"/>
+              <defaultCapable value="false"/>
+              <focusCycleRoot value="false"/>
+              <focusPainted value="false"/>
+              <font size="28"/>
+              <label value="NUEVO CLIENTE"/>
+              <text value="NUEVO CLIENTE"/>
+            </properties>
+          </component>
+          <component id="64b1f" class="javax.swing.JButton" binding="VERCLIENTESButton" default-binding="true">
+            <constraints>
+              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <gridbag top="10" left="0" bottom="0" right="0" weightx="0.0" weighty="0.0" ipadx="2" ipady="20"/>
+            </constraints>
+            <properties>
+              <background color="-1"/>
+              <borderPainted value="false"/>
+              <focusPainted value="false"/>
+              <font size="28"/>
+              <text value="VER CLIENTES"/>
+            </properties>
+          </component>
+          <component id="17e06" class="javax.swing.JButton" binding="AGREGARVENTAButton" default-binding="true">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <gridbag top="10" left="0" bottom="0" right="0" weightx="0.0" weighty="0.0" ipadx="2" ipady="20"/>
+            </constraints>
+            <properties>
+              <background color="-1"/>
+              <borderPainted value="false"/>
+              <focusPainted value="false"/>
+              <font size="28"/>
+              <text value="AGREGAR VENTA"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+    </children>
+  </grid>
+</form>
