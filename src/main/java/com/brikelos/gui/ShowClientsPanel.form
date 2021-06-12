@@ -251,7 +251,7 @@
           </grid>
         </children>
       </grid>
-      <grid id="bc20e" binding="panelCompra" layout-manager="GridBagLayout">
+      <grid id="bc20e" binding="purchasesPanel" layout-manager="GridBagLayout">
         <constraints>
           <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
           <gridbag weightx="0.0" weighty="0.0"/>

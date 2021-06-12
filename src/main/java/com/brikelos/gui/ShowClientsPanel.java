@@ -1,6 +1,6 @@
 package com.brikelos.gui;
 
-import com.brikelos.templates.JCompra;
+import com.brikelos.templates.JPurchase;
 import org.jdesktop.swingx.prompt.PromptSupport;
 
 import javax.swing.*;
@@ -15,7 +15,7 @@ public class ShowClientsPanel {
     private JPanel panel;
     private JTextField searchClients;
     private JList listOfClients;
-    private JPanel panelCompra;
+    private JPanel purchasesPanel;
 
     DefaultListModel defaultListModel = new DefaultListModel();
 
@@ -29,7 +29,9 @@ public class ShowClientsPanel {
         PromptSupport.setPrompt("Buscar cliente...", searchClients);
         searchClients.setFont(new Font("Arial", Font.PLAIN, 20));
 
-
+        /**
+         * Key down listener in the JList
+         */
         searchClients.addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent e) {
@@ -37,6 +39,9 @@ public class ShowClientsPanel {
                 searchFilter(searchClients.getText());
             }
         });
+        /**
+         * Mouse click listener in the JList
+         */
         listOfClients.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -45,10 +50,10 @@ public class ShowClientsPanel {
             }
         });
 
-        panelCompra.setLayout(new BoxLayout(panelCompra, BoxLayout.PAGE_AXIS));
+        purchasesPanel.setLayout(new BoxLayout(purchasesPanel, BoxLayout.PAGE_AXIS));
 
         for(int i = 0; i < 20; i++) {
-            panelCompra.add(new JCompra(0, "10/10/2021", "Los enanitos verdes", "A JLabel object can display either text, an image, or both. You can specify where in the label's display area the label's contents are aligned by setting the vertical and horizontal alignment. By default, labels are vertically centered in their display area. Text-only labels are leading edge aligned, by default; image-only labels are horizontally centered, by default.", 1000));
+            purchasesPanel.add(new JPurchase(0, "10/10/2021", "Los enanitos verdes", "A JLabel object can display either text, an image, or both. You can specify where in the label's display area the label's contents are aligned by setting the vertical and horizontal alignment. By default, labels are vertically centered in their display area. Text-only labels are leading edge aligned, by default; image-only labels are horizontally centered, by default.", 1000));
         }
     }
 

@@ -25,7 +25,9 @@ public class AddSellPanel {
         PromptSupport.setPrompt("Buscar cliente...", clientSearch);
         clientSearch.setFont(new Font("Arial", Font.PLAIN, 20));
 
-
+        /**
+         * Key down listener in the JList
+         */
         clientSearch.addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent e) {
@@ -33,6 +35,9 @@ public class AddSellPanel {
                 searchFilter(clientSearch.getText());
             }
         });
+        /**
+         * Mouse click listener in the JList
+         */
         clientList.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -40,7 +45,10 @@ public class AddSellPanel {
                 System.out.println(clientList.getSelectedValue());
             }
         });
-
+        /**
+         * Button press listener.
+         * Handles the save action to the database.
+         */
         button.addActionListener(e -> {
 
             Connection connection = new DatabaseHandler().connect();
@@ -53,16 +61,22 @@ public class AddSellPanel {
         });
     }
 
+    /**
+     * Adds all the clients to the JList.
+     */
     private void bindData() {
         new DatabaseHandler().getAllClients().forEach((client) -> {
             defaultListModel.addElement(client);
         });
-
         clientList.setModel(defaultListModel);
         clientList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
-
+    /**
+     * Filters the names from the database to the searchTerm and if
+     * there are coincidences it saves it in the JList to show them.
+     * @param searchTerm
+     */
     private void searchFilter(String searchTerm) {
         DefaultListModel filteredItems = new DefaultListModel();
         new DatabaseHandler().getAllClients().forEach((client) -> {
@@ -75,6 +89,10 @@ public class AddSellPanel {
         clientList.setModel(defaultListModel);
     }
 
+    /**
+     * Returns the JPanel.
+     * @return JPanel
+     */
     JPanel getPanel() {
         return panel;
     }

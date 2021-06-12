@@ -23,67 +23,103 @@ public class AddClientPanel {
          * Triggers when the button is clicked.
          */
         saveButton.addActionListener(e -> {
+            /**
+             * Checks if the name and dni is empty and displays a warning.
+             */
             if(nameAndSurname.getText().equals("")) {
-                JOptionPane.showMessageDialog(null, "El nombre no puede quedar en blanco.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(
+                        null,
+                        "El nombre no puede quedar en blanco.",
+                        "Advertencia",
+                        JOptionPane.WARNING_MESSAGE
+                );
             } else if(!Util.isNumeric(dni.getText())) {
-                JOptionPane.showMessageDialog(null, "El DNI solo puede contener números.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(
+                        null,
+                        "El DNI solo puede contener números.",
+                        "Advertencia",
+                        JOptionPane.WARNING_MESSAGE
+                );
             } else {
                 Connection connection = new DatabaseHandler().connect();
                 String error = "";
 
                 /**
-                 * Same name check
+                 * Checks if the same name already exists in the database.
                  */
                 try {
-                    ResultSet res = connection.createStatement().executeQuery("SELECT * FROM Clients WHERE upper(name)='" + nameAndSurname.getText().toUpperCase() + "';");
+                    ResultSet res = connection.createStatement().executeQuery(
+                            "SELECT * FROM Clients WHERE upper(name)='" + nameAndSurname.getText().toUpperCase() + "';"
+                    );
                     if(res.next()) {
                         error = "Ya hay un cliente registrado con ese nombre.";
                     }
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
                 }
 
                 /**
-                 * Same DNI check
+                 * Checks if the same DNI already exists in the database.
                  */
                 try {
-                    ResultSet res = connection.createStatement().executeQuery("SELECT * FROM Clients WHERE (dni=" + dni.getText() + ");");
+                    ResultSet res = connection.createStatement().executeQuery(
+                            "SELECT * FROM Clients WHERE (dni=" + dni.getText() + ");"
+                    );
                     if(res.next()) {
                         error = "Ya hay un cliente registrado con ese DNI.";
                     }
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
                 }
 
+                /**
+                 * If there are errors, it display a warning to the user.
+                 * Else: it displays a confirmation message and if the answer is 'yes'
+                 * it saves the information to the database.
+                 */
                 if(error.length() != 0) {
-                    JOptionPane.showMessageDialog(null, error, "ERROR", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(
+                            null,
+                            error,
+                            "ERROR",
+                            JOptionPane.ERROR_MESSAGE
+                    );
                     try {
                         connection.close();
-                    } catch (SQLException throwables) {
-                        throwables.printStackTrace();
+                    } catch (SQLException e1) {
+                        e1.printStackTrace();
                     }
                 } else {
-                    int reply = JOptionPane.showConfirmDialog(null,
-                            "<html>" +
-                                    "¿Son correctos estos datos?" +
-                                    "<br>" +
+                    int reply = JOptionPane.showConfirmDialog(
+                            null,
+                            "<html>"                                                  +
+                                    "¿Son correctos estos datos?" +                    "<br>" +
                                     "Nombre y apellido: " + nameAndSurname.getText() + "<br>" +
-                                    "DNI: " + dni.getText() + "<br>" +
-                                    "Tel.: " + phoneNum.getText() + "<br>" +
-                                    "Email: " + email.getText() + "<br>" +
+                                    "DNI: " + dni.getText() +                          "<br>" +
+                                    "Tel.: " + phoneNum.getText() +                    "<br>" +
+                                    "Email: " + email.getText() +                      "<br>" +
                                     "</html>",
-                            "Confirmar datos", JOptionPane.YES_NO_OPTION);
+                            "Confirmar datos",
+                            JOptionPane.YES_NO_OPTION
+                    );
                     if(reply == JOptionPane.YES_OPTION) {
                         try {
-                            connection.createStatement().execute("INSERT INTO Clients (name, dni, phone, email, moneySpent) VALUES (" +
+                            connection.createStatement().execute(
+                                    "INSERT INTO Clients (name, dni, phone, email, moneySpent) VALUES (" +
                                     "'" + nameAndSurname.getText() + "', "
-                                        + dni.getText()            + ", " +
+                                        + dni.getText()            + ", "  +
                                     "'" + phoneNum.getText()       + "', " +
                                     "'" + email.getText()          + "', " +
                                     "0" +
-                                    ");");
+                                    ");"
+                            );
                         } catch (SQLException e1) {
-                            JOptionPane.showMessageDialog(null, e1.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(
+                                    null,
+                                    e1.getMessage(),
+                                    "ERROR",
+                                    JOptionPane.ERROR_MESSAGE
+                            );
                             e1.printStackTrace();
                         } finally {
                             try {
@@ -91,7 +127,12 @@ public class AddClientPanel {
                             } catch (SQLException e2) {
                                 e2.printStackTrace();
                             }
-                            JOptionPane.showMessageDialog(null, nameAndSurname.getText() + " fue agregado a la lista de clientes.", "", JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showMessageDialog(
+                                    null,
+                                    nameAndSurname.getText() + " fue agregado a la lista de clientes.",
+                                    "Cliente agregado.",
+                                    JOptionPane.INFORMATION_MESSAGE
+                            );
                             GUIHandler.changeScreen(new AddClientPanel().getPanel());
                         }
                     }
@@ -100,6 +141,10 @@ public class AddClientPanel {
         });
     }
 
+    /**
+     * Returns the panel.
+     * @return JPanel
+     */
     public JPanel getPanel() {
         return panel;
     }

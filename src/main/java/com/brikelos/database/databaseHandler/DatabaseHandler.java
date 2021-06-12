@@ -9,29 +9,12 @@ import java.util.ArrayList;
 public class DatabaseHandler {
 
     /**
-     * Creates the database if it already doesn't exists.
-     */
-    public void createNewDatabase() {
-        Connection conn = null;
-        try {
-            conn = this.connect();
-            if (conn != null) {
-                DatabaseMetaData meta = conn.getMetaData();
-                System.out.println("Driver: " + meta.getDriverName());
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        } finally {
-            try {
-                conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    /**
-     * Connect to the database.
+     * Connects to the database.
+     *
+     * If the database doesn't exists, it creates it.
+     *
+     * Creation of tables 'Clients', 'Sells' if it doesn't exits.
+     *
      * @return Connection
      */
     public Connection connect() {
@@ -83,8 +66,8 @@ public class DatabaseHandler {
     }
 
     /**
-     * Returns an arraylist with all the clients.
-     * @return
+     * Returns an ArrayList<Client> with all the clients.
+     * @return ArrayList<Client>
      */
     public static ArrayList<Client> getAllClients() {
         ArrayList<Client> clients = new ArrayList();

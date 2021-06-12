@@ -13,10 +13,18 @@ public class MainGUI extends JFrame {
     private JPanel sidebar;
     private static JPanel contentPanel;
 
+    /**
+     * Returns the contentPanel (panel in the center of the screen).
+     * @return JPanel
+     */
     public static JPanel getContentPanel() {
         return contentPanel;
     }
 
+    /**
+     * Calls the JFrame constructor and sets up the main frame configuration.
+     * @param title
+     */
     public MainGUI(String title) {
         super(title);
 
@@ -40,6 +48,7 @@ public class MainGUI extends JFrame {
 
         /**
          * Triggered when clicked on 'AGREGAR VENTA'
+         * Changes the screen to the AddSellPanel.
          */
         addSellButton.addActionListener(e -> {
             GUIHandler.changeScreen(new AddSellPanel().getPanel());
@@ -47,6 +56,7 @@ public class MainGUI extends JFrame {
 
         /**
          * Triggered when clicked on 'VER CLIENTES'
+         * Changes the screen to the ShowClientsPanel.
          */
         showClientsButton.addActionListener(e -> {
             GUIHandler.changeScreen(new ShowClientsPanel().getPanel());
@@ -54,6 +64,7 @@ public class MainGUI extends JFrame {
 
         /**
          * Triggered when clicked on 'NUEVO CLIENTE'
+         * Changes the screen to the AddClientPanel.
          */
         newClientButton.addActionListener(e -> {
             GUIHandler.changeScreen(new AddClientPanel().getPanel());

@@ -3,9 +3,17 @@ package com.brikelos.templates;
 import javax.swing.*;
 import java.awt.*;
 
-public class JCompra extends JPanel {
+public class JPurchase extends JPanel {
 
-    public JCompra(int id, String fecha, String titulo, String descripcion, double precio) {
+    /**
+     * JPanel to show a purchase.
+     * @param id
+     * @param fecha
+     * @param titulo
+     * @param descripcion
+     * @param precio
+     */
+    public JPurchase(int id, String fecha, String titulo, String descripcion, double precio) {
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         Font font = new Font("Arial", Font.PLAIN, 20);
 
