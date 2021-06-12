@@ -2,14 +2,12 @@ package com.brikelos.gui;
 
 
 import com.brikelos.database.databaseHandler.DatabaseHandler;
-import com.brikelos.templates.Client;
+import com.brikelos.util.Util;
 import org.jdesktop.swingx.prompt.PromptSupport;
 
 import javax.swing.*;
-import javax.xml.crypto.Data;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.ArrayList;
 
 public class AddSellPanel {
 
@@ -22,52 +20,52 @@ public class AddSellPanel {
         /**
          * Style to the client search.
          */
-        PromptSupport.setPrompt("Buscar cliente...", buscarCliente);
-        buscarCliente.setFont(new Font("Arial", Font.PLAIN, 20));
+        PromptSupport.setPrompt("Buscar cliente...", clientSearch);
+        clientSearch.setFont(new Font("Arial", Font.PLAIN, 20));
 
 
-        buscarCliente.addKeyListener(new KeyAdapter() {
+        clientSearch.addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent e) {
                 super.keyReleased(e);
-                searchFilter(buscarCliente.getText());
+                searchFilter(clientSearch.getText());
             }
         });
-        listadoClientes.addMouseListener(new MouseAdapter() {
+        clientList.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                System.out.println(listadoClientes.getSelectedValue());
+                System.out.println(clientList.getSelectedValue());
             }
         });
 
-        guardarButton.addActionListener(e -> {
+        button.addActionListener(e -> {
+
+
 
         });
     }
 
     private void bindData() {
         new DatabaseHandler().getAllClients().forEach((client) -> {
-            defaultListModel.addElement(client.getName());
+            defaultListModel.addElement(client);
         });
-        listadoClientes.setModel(defaultListModel);
-        listadoClientes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+        clientList.setModel(defaultListModel);
+        clientList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
 
     private void searchFilter(String searchTerm) {
         DefaultListModel filteredItems = new DefaultListModel();
-
-        new DatabaseHandler().getAllClients().stream().forEach((star) -> {
-            String starName = star.toString().toLowerCase();
-
-            if(starName.contains(searchTerm.toLowerCase())) {
-                filteredItems.addElement(star);
+        new DatabaseHandler().getAllClients().forEach((client) -> {
+            String name = client.getName().toLowerCase();
+            if(Util.isNumeric(searchTerm) && client.getDni() == Integer.parseInt(searchTerm) || name.contains(searchTerm.toLowerCase())) {
+                filteredItems.addElement(client);
             }
-
         });
         defaultListModel = filteredItems;
-        listadoClientes.setModel(defaultListModel);
+        clientList.setModel(defaultListModel);
     }
 
     JPanel getPanel() {
@@ -75,11 +73,11 @@ public class AddSellPanel {
     }
 
     private JPanel panel;
-    private JList listadoClientes;
-    private JTextField buscarCliente;
-    private JTextField textField1;
-    private JTextField tituloVenta;
-    private JTextArea descripcionVenta;
-    private JButton guardarButton;
-    private JTextField textField2;
+    private JList clientList;
+    private JTextField clientSearch;
+    private JTextField sellDate;
+    private JTextField sellTitle;
+    private JTextArea sellDescription;
+    private JButton button;
+    private JTextField sellPrice;
 }

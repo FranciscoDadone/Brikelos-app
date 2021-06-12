@@ -1,6 +1,7 @@
 package com.brikelos.gui;
 
 import com.brikelos.database.databaseHandler.DatabaseHandler;
+import com.brikelos.util.Util;
 
 import javax.swing.*;
 import java.sql.Connection;
@@ -24,7 +25,7 @@ public class AddClientPanel {
         saveButton.addActionListener(e -> {
             if(nameAndSurname.getText().equals("")) {
                 JOptionPane.showMessageDialog(null, "El nombre no puede quedar en blanco.", "Advertencia", JOptionPane.WARNING_MESSAGE);
-            } else if(!isNumeric(dni.getText())) {
+            } else if(!Util.isNumeric(dni.getText())) {
                 JOptionPane.showMessageDialog(null, "El DNI solo puede contener números.", "Advertencia", JOptionPane.WARNING_MESSAGE);
             } else {
                 Connection connection = new DatabaseHandler().connect();
@@ -97,16 +98,6 @@ public class AddClientPanel {
                 }
             }
         });
-    }
-
-    private static boolean isNumeric(String strNum) {
-        if (strNum == null) return false;
-        try {
-            Double.parseDouble(strNum);
-        } catch (NumberFormatException nfe) {
-            return false;
-        }
-        return true;
     }
 
     public JPanel getPanel() {
