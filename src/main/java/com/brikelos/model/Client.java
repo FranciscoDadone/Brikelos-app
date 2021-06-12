@@ -1,4 +1,4 @@
-package com.brikelos.templates;
+package com.brikelos.model;
 
 public class Client {
 
@@ -61,6 +61,30 @@ public class Client {
 
     public double getMoneySpent() {
         return moneySpent;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDni(int dni) {
+        this.dni = dni;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public void setMoneySpent(double moneySpent) {
+        this.moneySpent = moneySpent;
     }
 
     private int    id;

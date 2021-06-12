@@ -1,6 +1,6 @@
 package com.brikelos;
 
-import com.brikelos.gui.GUIHandler;
+import com.brikelos.util.GUIHandler;
 
 public class main {
 

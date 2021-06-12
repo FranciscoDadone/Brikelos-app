@@ -1,13 +1,10 @@
-package com.brikelos.database.databaseHandler;
-
-import com.brikelos.templates.Client;
+package com.brikelos.model;
 
 import java.io.File;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class DatabaseHandler {
-
+public class Connection {
     /**
      * Connects to the database.
      *
@@ -17,8 +14,8 @@ public class DatabaseHandler {
      *
      * @return Connection
      */
-    public Connection connect() {
-        Connection con = null;
+    public static java.sql.Connection connect() {
+        java.sql.Connection con = null;
         try {
             File theDir = new File("database");
             if (!theDir.exists()){
@@ -64,36 +61,4 @@ public class DatabaseHandler {
         }
         return con;
     }
-
-    /**
-     * Returns an ArrayList<Client> with all the clients.
-     * @return ArrayList<Client>
-     */
-    public static ArrayList<Client> getAllClients() {
-        ArrayList<Client> clients = new ArrayList();
-        Connection connection = new DatabaseHandler().connect();
-        try {
-            ResultSet res = connection.createStatement().executeQuery("SELECT * FROM Clients;");
-            while(res.next()) {
-                clients.add(new Client(
-                        res.getInt("id"),
-                        res.getString("name"),
-                        res.getInt("dni"),
-                        res.getString("email"),
-                        res.getString("phone"),
-                        res.getDouble("moneySpent")
-                ));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        return clients;
-    }
-
 }

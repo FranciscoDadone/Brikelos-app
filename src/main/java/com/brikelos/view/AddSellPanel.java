@@ -1,14 +1,14 @@
-package com.brikelos.gui;
+package com.brikelos.view;
 
 
-import com.brikelos.database.databaseHandler.DatabaseHandler;
+import com.brikelos.model.ClientQueries;
+import com.brikelos.model.Connection;
 import com.brikelos.util.Util;
 import org.jdesktop.swingx.prompt.PromptSupport;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.sql.Connection;
 import java.sql.SQLException;
 
 public class AddSellPanel {
@@ -51,7 +51,7 @@ public class AddSellPanel {
          */
         button.addActionListener(e -> {
 
-            Connection connection = new DatabaseHandler().connect();
+            java.sql.Connection connection = new Connection().connect();
             try {
                 connection.createStatement().execute("");
             } catch (SQLException e1) {
@@ -65,7 +65,7 @@ public class AddSellPanel {
      * Adds all the clients to the JList.
      */
     private void bindData() {
-        new DatabaseHandler().getAllClients().forEach((client) -> {
+        new ClientQueries().getAllClients().forEach((client) -> {
             defaultListModel.addElement(client);
         });
         clientList.setModel(defaultListModel);
@@ -79,7 +79,7 @@ public class AddSellPanel {
      */
     private void searchFilter(String searchTerm) {
         DefaultListModel filteredItems = new DefaultListModel();
-        new DatabaseHandler().getAllClients().forEach((client) -> {
+        new ClientQueries().getAllClients().forEach((client) -> {
             String name = client.getName().toLowerCase();
             if(Util.isNumeric(searchTerm) && client.getDni() == Integer.parseInt(searchTerm) || name.contains(searchTerm.toLowerCase())) {
                 filteredItems.addElement(client);

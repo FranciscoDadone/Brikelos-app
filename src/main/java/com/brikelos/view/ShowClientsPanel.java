@@ -1,6 +1,5 @@
-package com.brikelos.gui;
+package com.brikelos.view;
 
-import com.brikelos.templates.JPurchase;
 import org.jdesktop.swingx.prompt.PromptSupport;
 
 import javax.swing.*;

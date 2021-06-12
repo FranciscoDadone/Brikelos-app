@@ -1,4 +1,6 @@
-package com.brikelos.gui;
+package com.brikelos.util;
+
+import com.brikelos.view.MainGUI;
 
 import javax.swing.*;
 

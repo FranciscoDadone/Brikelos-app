@@ -1,4 +1,4 @@
-package com.brikelos.templates;
+package com.brikelos.view;
 
 import javax.swing.*;
 import java.awt.*;
