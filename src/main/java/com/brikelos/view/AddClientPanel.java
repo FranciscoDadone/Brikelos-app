@@ -19,9 +19,6 @@ public class AddClientPanel {
          * Triggers when the button is clicked.
          */
         saveButton.addActionListener(new AddClientController(this));
-//        saveButton.addActionListener(e -> {
-//
-//        });
     }
 
     /**

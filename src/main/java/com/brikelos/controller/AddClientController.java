@@ -66,8 +66,8 @@ public class AddClientController implements ActionListener {
             } else {
                 int reply = JOptionPane.showConfirmDialog(
                         null,
-                        "<html>"                                                  +
-                                "¿Son correctos estos datos?" +                    "<br>" +
+                        "<html>"                                                       +
+                                "¿Son correctos estos datos?" +                         "<br>" +
                                 "Nombre y apellido: " + view.nameAndSurname.getText() + "<br>" +
                                 "DNI: " + view.dni.getText() +                          "<br>" +
                                 "Tel.: " + view.phoneNum.getText() +                    "<br>" +

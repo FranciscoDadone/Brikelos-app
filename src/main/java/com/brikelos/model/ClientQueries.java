@@ -115,5 +115,31 @@ public class ClientQueries extends Connection {
         return true;
     }
 
+    /**
+     * Returns the client id by the name.
+     * If it doesn't exits it returns -1.
+     * @param name
+     * @return
+     */
+    public static int getIdByName(String name) {
+        java.sql.Connection connection = connect();
+        try {
+            ResultSet res = connection.createStatement().executeQuery(
+                    "SELECT id FROM Clients WHERE (name='" + name + "');"
+            );
+            if(res.next()) {
+                return res.getInt("id");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return -1;
+    }
 
 }

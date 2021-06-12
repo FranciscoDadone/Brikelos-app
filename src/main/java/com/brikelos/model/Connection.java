@@ -53,7 +53,7 @@ public class Connection {
                         "date VARCHAR(255)," +
                         "description VARCHAR(255)," +
                         "price DOUBLE," +
-                        "clientID INTEGER" +
+                        "buyerID INTEGER" +
                         ");");            }
 
         } catch (SQLException e) {
