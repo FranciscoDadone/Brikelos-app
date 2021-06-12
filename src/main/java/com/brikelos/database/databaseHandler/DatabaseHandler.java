@@ -36,15 +36,21 @@ public class DatabaseHandler {
      */
     public Connection connect() {
         Connection con = null;
-        boolean newDatabase = false;
         try {
             File theDir = new File("database");
             if (!theDir.exists()){
                 theDir.mkdirs();
-                newDatabase = true;
             }
             con = DriverManager.getConnection("jdbc:sqlite:database/sqlite.db");
-            if(newDatabase) {
+            ResultSet res = con.createStatement().executeQuery("SELECT name FROM sqlite_master WHERE type='table';");
+            ArrayList<String> tables = new ArrayList<>();
+            while(res.next()) {
+                tables.add(res.getString(1));
+            }
+            /**
+             * Creation of table Clients if it doesn't exists.
+             */
+            if(!tables.contains("Clients")) {
                 Statement statement = con.createStatement();
                 statement.execute("CREATE TABLE Clients (" +
                                 "id INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -55,6 +61,20 @@ public class DatabaseHandler {
                                 "moneySpent DOUBLE" +
                                 ");");
             }
+
+            /**
+             * Creation of table Sells if it doesn't exists.
+             */
+            if(!tables.contains("Sells")) {
+                Statement statement = con.createStatement();
+                statement.execute("CREATE TABLE Sells (" +
+                        "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                        "title VARCHAR(255)," +
+                        "date VARCHAR(255)," +
+                        "description VARCHAR(255)," +
+                        "price DOUBLE," +
+                        "clientID INTEGER" +
+                        ");");            }
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -83,6 +103,12 @@ public class DatabaseHandler {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return clients;
     }

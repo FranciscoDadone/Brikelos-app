@@ -8,6 +8,8 @@ import org.jdesktop.swingx.prompt.PromptSupport;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 public class AddSellPanel {
 
@@ -41,7 +43,12 @@ public class AddSellPanel {
 
         button.addActionListener(e -> {
 
-
+            Connection connection = new DatabaseHandler().connect();
+            try {
+                connection.createStatement().execute("");
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
 
         });
     }
