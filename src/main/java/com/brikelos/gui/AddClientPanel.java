@@ -24,6 +24,8 @@ public class AddClientPanel {
         saveButton.addActionListener(e -> {
             if(nameAndSurname.getText().equals("")) {
                 JOptionPane.showMessageDialog(null, "El nombre no puede quedar en blanco.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            } else if(!isNumeric(dni.getText())) {
+                JOptionPane.showMessageDialog(null, "El DNI solo puede contener números.", "Advertencia", JOptionPane.WARNING_MESSAGE);
             } else {
                 Connection connection = new DatabaseHandler().connect();
                 String error = "";
@@ -44,8 +46,8 @@ public class AddClientPanel {
                  * Same DNI check
                  */
                 try {
-                    ResultSet res = connection.createStatement().executeQuery("SELECT * FROM Clients WHERE (dni='" + dni.getText() + "');");
-                    if(res.next() && !res.getString("dni").equals("")) {
+                    ResultSet res = connection.createStatement().executeQuery("SELECT * FROM Clients WHERE (dni=" + dni.getText() + ");");
+                    if(res.next()) {
                         error = "Ya hay un cliente registrado con ese DNI.";
                     }
                 } catch (SQLException throwables) {
@@ -54,6 +56,11 @@ public class AddClientPanel {
 
                 if(error.length() != 0) {
                     JOptionPane.showMessageDialog(null, error, "ERROR", JOptionPane.ERROR_MESSAGE);
+                    try {
+                        connection.close();
+                    } catch (SQLException throwables) {
+                        throwables.printStackTrace();
+                    }
                 } else {
                     int reply = JOptionPane.showConfirmDialog(null,
                             "<html>" +
@@ -68,8 +75,8 @@ public class AddClientPanel {
                     if(reply == JOptionPane.YES_OPTION) {
                         try {
                             connection.createStatement().execute("INSERT INTO Clients (name, dni, phone, email, moneySpent) VALUES (" +
-                                    "'" + nameAndSurname.getText() + "', " +
-                                    "'" + dni.getText()            + "', " +
+                                    "'" + nameAndSurname.getText() + "', "
+                                        + dni.getText()            + ", " +
                                     "'" + phoneNum.getText()       + "', " +
                                     "'" + email.getText()          + "', " +
                                     "0" +
@@ -92,6 +99,15 @@ public class AddClientPanel {
         });
     }
 
+    private static boolean isNumeric(String strNum) {
+        if (strNum == null) return false;
+        try {
+            Double.parseDouble(strNum);
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+        return true;
+    }
 
     public JPanel getPanel() {
         return panel;
