@@ -1,4 +1,4 @@
-package com.brikelos.model;
+package com.brikelos.model.models;
 
 public class Client {
 

@@ -1,4 +1,7 @@
-package com.brikelos.model;
+package com.brikelos.model.queries;
+
+import com.brikelos.model.Connection;
+import com.brikelos.model.models.Client;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

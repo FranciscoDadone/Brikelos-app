@@ -1,9 +1,8 @@
 package com.brikelos.controller;
 
-import com.brikelos.model.ClientQueries;
-import com.brikelos.model.Connection;
-import com.brikelos.model.Sell;
-import com.brikelos.model.SellQueries;
+import com.brikelos.model.queries.ClientQueries;
+import com.brikelos.model.models.Sell;
+import com.brikelos.model.queries.SellQueries;
 import com.brikelos.util.Util;
 import com.brikelos.view.AddSellPanel;
 import javax.swing.*;

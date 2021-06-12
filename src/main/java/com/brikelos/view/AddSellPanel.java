@@ -23,7 +23,7 @@ public class AddSellPanel {
      * Returns the JPanel.
      * @return JPanel
      */
-    JPanel getPanel() {
+    public JPanel getPanel() {
         return panel;
     }
 

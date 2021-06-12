@@ -1,4 +1,7 @@
-package com.brikelos.model;
+package com.brikelos.model.queries;
+
+import com.brikelos.model.Connection;
+import com.brikelos.model.models.Sell;
 
 import java.sql.SQLException;
 
@@ -7,7 +10,8 @@ public class SellQueries extends Connection {
     public static boolean addSell(Sell sell) {
         java.sql.Connection connection = connect();
         try {
-            connection.createStatement().execute("INSERT INTO Sells (title, date, description, price, buyerID) VALUES (" +
+            connection.createStatement().execute(
+                    "INSERT INTO Sells (title, date, description, price, buyerID) VALUES (" +
                     "'" + sell.getTitle()       + "'," +
                     "'" + sell.getDate()        + "'," +
                     "'" + sell.getDescription() + "'," +

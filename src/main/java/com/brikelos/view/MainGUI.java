@@ -1,5 +1,6 @@
 package com.brikelos.view;
 
+import com.brikelos.controller.MainGUIController;
 import com.brikelos.util.GUIHandler;
 
 import javax.swing.*;
@@ -7,13 +8,6 @@ import java.awt.*;
 import java.io.InputStream;
 
 public class MainGUI extends JFrame {
-
-    private JPanel mainPanel;
-    private JButton newClientButton;
-    private JButton addSellButton;
-    private JButton showClientsButton;
-    private JPanel sidebar;
-    private static JPanel contentPanel;
 
     /**
      * Returns the contentPanel (panel in the center of the screen).
@@ -47,29 +41,19 @@ public class MainGUI extends JFrame {
         this.setVisible(true);
         GUIHandler.changeScreen(new AddSellPanel().getPanel());
 
-
         /**
-         * Triggered when clicked on 'AGREGAR VENTA'
-         * Changes the screen to the AddSellPanel.
+         * Listeners
          */
-        addSellButton.addActionListener(e -> {
-            GUIHandler.changeScreen(new AddSellPanel().getPanel());
-        });
-
-        /**
-         * Triggered when clicked on 'VER CLIENTES'
-         * Changes the screen to the ShowClientsPanel.
-         */
-        showClientsButton.addActionListener(e -> {
-            GUIHandler.changeScreen(new ShowClientsPanel().getPanel());
-        });
-
-        /**
-         * Triggered when clicked on 'NUEVO CLIENTE'
-         * Changes the screen to the AddClientPanel.
-         */
-        newClientButton.addActionListener(e -> {
-            GUIHandler.changeScreen(new AddClientPanel().getPanel());
-        });
+        addSellButton.addActionListener(new MainGUIController(this));
+        showClientsButton.addActionListener(new MainGUIController(this));
+        newClientButton.addActionListener(new MainGUIController(this));
     }
+
+
+    private JPanel mainPanel;
+    public JButton newClientButton;
+    public JButton addSellButton;
+    public JButton showClientsButton;
+    private JPanel sidebar;
+    private static JPanel contentPanel;
 }

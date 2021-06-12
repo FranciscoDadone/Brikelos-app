@@ -14,10 +14,6 @@ public class AddClientPanel {
     public JButton saveButton;
 
     public AddClientPanel() {
-
-        /**
-         * Triggers when the button is clicked.
-         */
         saveButton.addActionListener(new AddClientController(this));
     }
 

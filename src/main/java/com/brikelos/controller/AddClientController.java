@@ -1,7 +1,7 @@
 package com.brikelos.controller;
 
-import com.brikelos.model.Client;
-import com.brikelos.model.ClientQueries;
+import com.brikelos.model.models.Client;
+import com.brikelos.model.queries.ClientQueries;
 import com.brikelos.util.GUIHandler;
 import com.brikelos.util.Util;
 import com.brikelos.view.AddClientPanel;
