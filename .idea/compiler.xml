@@ -9,8 +9,8 @@
         <module name="Brikelos-app" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="Brikelos-app" target="11" />
+    <bytecodeTargetLevel target="8">
+      <module name="Brikelos-app" target="8" />
     </bytecodeTargetLevel>
   </component>
 </project>

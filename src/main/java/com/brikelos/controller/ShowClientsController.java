@@ -72,7 +72,7 @@ public class ShowClientsController implements KeyListener, MouseListener {
             i.getAndIncrement();
             view.purchasesPanel.add(
                     new JPurchase(
-                            i.getAcquire(),
+                            i.get(),
                             purchase.getDate(),
                             purchase.getTitle(),
                             purchase.getDescription(),
