@@ -144,7 +144,7 @@
               <font size="20"/>
               <horizontalAlignment value="2"/>
               <horizontalTextPosition value="2"/>
-              <text value="Nombre: Francisco Dadone"/>
+              <text value=""/>
             </properties>
           </component>
           <component id="3627a" class="javax.swing.JLabel" binding="clientDNI">
@@ -156,7 +156,7 @@
               <font size="20"/>
               <horizontalAlignment value="2"/>
               <horizontalTextPosition value="2"/>
-              <text value="DNI: 43614123"/>
+              <text value=""/>
             </properties>
           </component>
           <component id="63480" class="javax.swing.JLabel" binding="clientPhone">
@@ -168,7 +168,7 @@
               <font size="20"/>
               <horizontalAlignment value="2"/>
               <horizontalTextPosition value="2"/>
-              <text value="Teléfono: 000000"/>
+              <text value="Selecciona un cliente para ver sus datos"/>
             </properties>
           </component>
           <component id="e5b92" class="javax.swing.JLabel" binding="clientEmail">
@@ -180,7 +180,7 @@
               <font size="20"/>
               <horizontalAlignment value="2"/>
               <horizontalTextPosition value="2"/>
-              <text value="Email: dadonefrancisco@hotmail.com.ar"/>
+              <text value=""/>
             </properties>
           </component>
           <component id="2091b" class="javax.swing.JLabel" binding="clientTotalSpent">
@@ -192,7 +192,7 @@
               <font size="20"/>
               <horizontalAlignment value="2"/>
               <horizontalTextPosition value="2"/>
-              <text value="Total gastado: $1000"/>
+              <text value=""/>
             </properties>
           </component>
         </children>
@@ -258,7 +258,20 @@
         </constraints>
         <properties/>
         <border type="none" title="Compras"/>
-        <children/>
+        <children>
+          <hspacer id="5ec2e">
+            <constraints>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <gridbag weightx="0.0" weighty="0.0"/>
+            </constraints>
+          </hspacer>
+          <vspacer id="fd90f">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+              <gridbag weightx="0.0" weighty="0.0"/>
+            </constraints>
+          </vspacer>
+        </children>
       </grid>
     </children>
   </grid>
