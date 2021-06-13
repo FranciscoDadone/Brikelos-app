@@ -1,5 +1,7 @@
 package com.brikelos.model.models;
 
+import com.brikelos.model.queries.ClientQueries;
+
 public class Client {
 
     public Client(String name, int dni, String email, String phone, double moneySpent) {
@@ -60,7 +62,7 @@ public class Client {
     }
 
     public double getMoneySpent() {
-        return moneySpent;
+        return ClientQueries.getTotalSpent(this);
     }
 
     public void setId(int id) {

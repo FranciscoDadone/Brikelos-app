@@ -5,7 +5,6 @@ import com.brikelos.model.models.Sell;
 import com.brikelos.model.queries.SellQueries;
 import com.brikelos.util.GUIHandler;
 import com.brikelos.util.Util;
-import com.brikelos.view.AddClientPanel;
 import com.brikelos.view.AddSellPanel;
 import javax.swing.*;
 import java.awt.event.*;

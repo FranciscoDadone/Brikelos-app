@@ -145,4 +145,69 @@ public class ClientQueries extends Connection {
         return -1;
     }
 
+    public static Client getClientByName(String name) {
+        java.sql.Connection connection = connect();
+        try {
+            ResultSet res = connection.createStatement().executeQuery(
+                    "SELECT * FROM Clients WHERE (name='" + name + "');"
+            );
+            if(res.next()) {
+                return new Client(
+                        res.getInt("id"),
+                        res.getString("name"),
+                        res.getInt("dni"),
+                        res.getString("email"),
+                        res.getString("phone"),
+                        res.getDouble("moneySpent")
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+    public static double getTotalSpent(Client client) {
+        java.sql.Connection connection = connect();
+        try {
+            ResultSet res = connection.createStatement().executeQuery(
+                    "SELECT moneySpent FROM Clients WHERE (name='" + client.getName() + "');"
+            );
+            if(res.next()) {
+                return res.getDouble("moneySpent");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return -1;
+    }
+
+    public static void addMoneySpent(int clientID, double price) {
+        java.sql.Connection connection = connect();
+        try {
+            connection.createStatement().execute(
+                    "UPDATE Clients SET moneySpent=" + price + " WHERE id=" + clientID + ";"
+            );
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }
