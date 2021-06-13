@@ -3,21 +3,22 @@ package com.brikelos.controller;
 import com.brikelos.model.queries.ClientQueries;
 import com.brikelos.model.models.Sell;
 import com.brikelos.model.queries.SellQueries;
+import com.brikelos.util.GUIHandler;
 import com.brikelos.util.Util;
+import com.brikelos.view.AddClientPanel;
 import com.brikelos.view.AddSellPanel;
 import javax.swing.*;
 import java.awt.event.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class AddSellController implements ActionListener, MouseListener, KeyListener {
+public class AddSellController implements ActionListener, KeyListener {
     DefaultListModel defaultListModel = new DefaultListModel();
 
     public AddSellController(AddSellPanel view) {
         this.view  = view;
         bindData();
     }
-
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -43,6 +44,13 @@ public class AddSellController implements ActionListener, MouseListener, KeyList
                         "Advertencia",
                         JOptionPane.WARNING_MESSAGE
                 );
+            } else if(!Util.isNumeric(view.sellPrice.getText())) {
+                JOptionPane.showMessageDialog(
+                        null,
+                        "El precio tiene que ser un número.",
+                        "Advertencia",
+                        JOptionPane.WARNING_MESSAGE
+                );
             } else {
                 String date;
                 if(view.sellDate.getText() == null || view.sellDate.getText().equals("")) {
@@ -52,13 +60,39 @@ public class AddSellController implements ActionListener, MouseListener, KeyList
                     date = view.sellDate.getText();
                 }
 
-                SellQueries.addSell(new Sell(
-                        ClientQueries.getIdByName(view.clientList.getSelectedValue().toString()),
-                        date,
-                        view.sellTitle.getText(),
-                        view.sellDescription.getText(),
-                        Double.parseDouble(view.sellPrice.getText())
-                ));
+                int reply = JOptionPane.showConfirmDialog(
+                        null,
+                        "<html>"                                             +
+                                "¿Son correctos estos datos de la venta?"            + "<br>" +
+                                "Fecha: "       + date                               + "<br>" +
+                                "Comprador: "   + view.clientList.getSelectedValue() + "<br>" +
+                                "Precio: "      + view.sellPrice.getText()           + "<br>" +
+                                "Título: "      + view.sellTitle.getText()           + "<br>" +
+                                "Descripción: " + view.sellDescription.getText(),
+                        "Confirmar datos",
+                        JOptionPane.YES_NO_OPTION
+                );
+
+                if(reply == JOptionPane.YES_OPTION) {
+                    boolean success = SellQueries.addSell(new Sell(
+                            ClientQueries.getIdByName(view.clientList.getSelectedValue().toString()),
+                            date,
+                            view.sellTitle.getText(),
+                            view.sellDescription.getText(),
+                            Double.parseDouble(view.sellPrice.getText())
+                    ));
+
+                    if(success) {
+                        JOptionPane.showMessageDialog(
+                                null,
+                                (success) ? "La venta de '" + view.sellTitle.getText() + "' fue guardada correctamente." : "Error al agregar cliente.",
+                                (success) ? "Venta guardada." : "ERROR",
+                                (success) ? JOptionPane.INFORMATION_MESSAGE : JOptionPane.ERROR_MESSAGE
+                        );
+                        GUIHandler.changeScreen(new AddSellPanel().getPanel());
+                    }
+
+                }
             }
         }
     }
@@ -91,15 +125,6 @@ public class AddSellController implements ActionListener, MouseListener, KeyList
         view.clientList.setModel(defaultListModel);
     }
 
-    private AddSellPanel view;
-
-    @Override
-    public void mouseClicked(MouseEvent e) {
-        if(e.getSource() == view.clientList) {
-            System.out.println(view.clientList.getSelectedValue());
-        }
-    }
-
     @Override
     public void keyReleased(KeyEvent e) {
         if(e.getSource().equals(view.clientSearch)) {
@@ -107,16 +132,9 @@ public class AddSellController implements ActionListener, MouseListener, KeyList
         }
     }
     @Override
-    public void mousePressed(MouseEvent e) {}
-    @Override
-    public void mouseReleased(MouseEvent e) {}
-    @Override
-    public void mouseEntered(MouseEvent e) {}
-    @Override
-    public void mouseExited(MouseEvent e) {}
-    @Override
     public void keyTyped(KeyEvent e) {}
-
     @Override
     public void keyPressed(KeyEvent e) {}
+
+    private AddSellPanel view;
 }

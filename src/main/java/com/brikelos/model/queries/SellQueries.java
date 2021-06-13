@@ -15,8 +15,9 @@ public class SellQueries extends Connection {
                     "'" + sell.getTitle()       + "'," +
                     "'" + sell.getDate()        + "'," +
                     "'" + sell.getDescription() + "'," +
-                          sell.getPrice()       + "," +
-                          sell.getBuyerID()     + ");");
+                          sell.getPrice()       + ","  +
+                          sell.getBuyerID()     + ");"
+            );
             return true;
         } catch (SQLException e) {
             e.printStackTrace();

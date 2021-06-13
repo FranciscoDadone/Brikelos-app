@@ -8,8 +8,10 @@ import java.awt.*;
 public class AddSellPanel {
     public AddSellPanel() {
 
+        /**
+         * Listeners
+         */
         clientSearch.addKeyListener(new AddSellController(this));
-        clientList.addMouseListener(new AddSellController(this));
         button.addActionListener(new AddSellController(this));
 
         /**
