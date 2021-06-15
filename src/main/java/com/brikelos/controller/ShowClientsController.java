@@ -32,7 +32,6 @@ public class ShowClientsController implements KeyListener, MouseListener {
         view.listOfClients.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
-
     private void searchFilter(String searchTerm) {
         DefaultListModel filteredItems = new DefaultListModel();
 

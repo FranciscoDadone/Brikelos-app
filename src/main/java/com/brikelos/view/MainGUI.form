@@ -9,7 +9,7 @@
     </properties>
     <border type="none"/>
     <children>
-      <grid id="1be0f" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="0">
+      <grid id="1be0f" layout-manager="BorderLayout" hgap="0" vgap="0">
         <constraints border-constraint="North"/>
         <properties>
           <background color="-8677648"/>
@@ -17,7 +17,7 @@
         <border type="none"/>
         <children>
           <component id="8c70e" class="javax.swing.JLabel">
-            <constraints/>
+            <constraints border-constraint="Center"/>
             <properties>
               <font name="Courier 10 Pitch" size="48" style="1"/>
               <foreground color="-1"/>
@@ -75,6 +75,21 @@
               <focusPainted value="false"/>
               <font size="28"/>
               <text value="AGREGAR VENTA"/>
+            </properties>
+          </component>
+          <component id="be031" class="javax.swing.JButton" binding="configButton">
+            <constraints>
+              <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+              <gridbag weightx="0.0" weighty="0.0"/>
+            </constraints>
+            <properties>
+              <background color="-57056"/>
+              <borderPainted value="false"/>
+              <contentAreaFilled value="false"/>
+              <focusPainted value="false"/>
+              <font size="48"/>
+              <foreground color="-13290187"/>
+              <text value="⚙️"/>
             </properties>
           </component>
         </children>

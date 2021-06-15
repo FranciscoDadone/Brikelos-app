@@ -47,6 +47,8 @@ public class MainGUI extends JFrame {
         addSellButton.addActionListener(new MainGUIController(this));
         showClientsButton.addActionListener(new MainGUIController(this));
         newClientButton.addActionListener(new MainGUIController(this));
+        configButton.addActionListener(new MainGUIController(this));
+        configButton.addMouseListener(new MainGUIController(this));
     }
 
 
@@ -55,5 +57,6 @@ public class MainGUI extends JFrame {
     public JButton addSellButton;
     public JButton showClientsButton;
     private JPanel sidebar;
+    public JButton configButton;
     private static JPanel contentPanel;
 }

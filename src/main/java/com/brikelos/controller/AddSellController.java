@@ -2,6 +2,7 @@ package com.brikelos.controller;
 
 import com.brikelos.model.queries.ClientQueries;
 import com.brikelos.model.models.Sell;
+import com.brikelos.model.queries.ConfigQueries;
 import com.brikelos.model.queries.SellQueries;
 import com.brikelos.util.GUIHandler;
 import com.brikelos.util.Util;
@@ -73,24 +74,42 @@ public class AddSellController implements ActionListener, KeyListener {
                 );
 
                 if(reply == JOptionPane.YES_OPTION) {
+                    int clientID = ClientQueries.getIdByName(view.clientList.getSelectedValue().toString());
+                    double sellPrice        = Double.parseDouble(view.sellPrice.getText());
+                    double clientMoneySpent = ClientQueries.getTotalSpent(ClientQueries.getClientByName(view.clientList.getSelectedValue().toString()));
                     boolean success = SellQueries.addSell(new Sell(
-                            ClientQueries.getIdByName(view.clientList.getSelectedValue().toString()),
+                            clientID,
                             date,
                             view.sellTitle.getText(),
                             view.sellDescription.getText(),
                             Double.parseDouble(view.sellPrice.getText())
                     ));
-
+                    JOptionPane.showMessageDialog(
+                            null,
+                            (success) ? "La venta de '" + view.sellTitle.getText() + "' fue guardada correctamente." : "Error al agregar cliente.",
+                            (success) ? "Venta guardada." : "ERROR",
+                            (success) ? JOptionPane.INFORMATION_MESSAGE : JOptionPane.ERROR_MESSAGE
+                    );
                     if(success) {
-                        JOptionPane.showMessageDialog(
-                                null,
-                                (success) ? "La venta de '" + view.sellTitle.getText() + "' fue guardada correctamente." : "Error al agregar cliente.",
-                                (success) ? "Venta guardada." : "ERROR",
-                                (success) ? JOptionPane.INFORMATION_MESSAGE : JOptionPane.ERROR_MESSAGE
-                        );
+                        double moneyAlertTrigger = ConfigQueries.getConfig().getMoneyAlert();
+                        if((clientMoneySpent + sellPrice) >= moneyAlertTrigger) {
+                            JOptionPane.showMessageDialog(
+                                    null,
+                                    view.clientList.getSelectedValue().toString() + " ha superado los $" + moneyAlertTrigger,
+                                    "Información",
+                                    JOptionPane.INFORMATION_MESSAGE
+                            );
+                            double clientBalance = ((sellPrice - moneyAlertTrigger) + clientMoneySpent);
+                            while(clientBalance >= moneyAlertTrigger) {
+                                clientBalance -= moneyAlertTrigger;
+                            }
+                            ClientQueries.setMoneySpent(
+                                    clientID,
+                                    clientBalance
+                            );
+                        }
                         GUIHandler.changeScreen(new AddSellPanel().getPanel());
                     }
-
                 }
             }
         }

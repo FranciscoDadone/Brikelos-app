@@ -39,7 +39,8 @@ public class Connection {
                                 "phone VARCHAR(50)," +
                                 "email VARCHAR(100)," +
                                 "moneySpent DOUBLE" +
-                                ");");
+                                ");"
+                );
             }
 
             /**
@@ -54,9 +55,32 @@ public class Connection {
                         "description VARCHAR(255)," +
                         "price DOUBLE," +
                         "buyerID INTEGER" +
-                        ");");            }
+                        ");"
+                );
+            }
 
-        } catch (SQLException e) {
+            /**
+             * Creation of table Config if it doesn't exists.
+             */
+            if(!tables.contains("Config")) {
+                Statement statement = con.createStatement();
+                statement.execute("CREATE TABLE Config (" +
+                        "id INTEGER, " +
+                        "moneyAlert DOUBLE" +
+                        ");"
+                );
+                /**
+                 * Initializes the table with default values.
+                 */
+                statement.execute(
+                        "INSERT INTO Config (id, moneyAlert) VALUES (" +
+                                "1, " +     // id
+                                "10000.0" + // default moneyAlertTrigger
+                                ");"
+                );
+
+            }
+            } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
         return con;

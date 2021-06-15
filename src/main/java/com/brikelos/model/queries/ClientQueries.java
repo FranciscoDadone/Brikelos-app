@@ -194,7 +194,7 @@ public class ClientQueries extends Connection {
         return -1;
     }
 
-    public static void addMoneySpent(int clientID, double price) {
+    public static void setMoneySpent(int clientID, double price) {
         java.sql.Connection connection = connect();
         try {
             connection.createStatement().execute(

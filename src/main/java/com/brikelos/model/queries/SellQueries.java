@@ -26,7 +26,7 @@ public class SellQueries extends Connection {
                           sell.getPrice()       + ","  +
                           sell.getBuyerID()     + ");"
             );
-            ClientQueries.addMoneySpent(sell.getBuyerID(), sell.getPrice());
+            ClientQueries.setMoneySpent(sell.getBuyerID(), sell.getPrice());
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
