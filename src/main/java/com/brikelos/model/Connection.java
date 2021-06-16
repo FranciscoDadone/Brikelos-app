@@ -1,5 +1,6 @@
 package com.brikelos.model;
 
+import javax.swing.filechooser.FileSystemView;
 import java.io.File;
 import java.sql.*;
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ public class Connection {
             if (!theDir.exists()){
                 theDir.mkdirs();
             }
-            con = DriverManager.getConnection("jdbc:sqlite:database/sqlite.db");
+            con = DriverManager.getConnection("jdbc:sqlite:" + FileSystemView.getFileSystemView().getDefaultDirectory().getPath() + "/Brikelos/database/sqlite.db");
             ResultSet res = con.createStatement().executeQuery("SELECT name FROM sqlite_master WHERE type='table';");
             ArrayList<String> tables = new ArrayList<>();
             while(res.next()) {
