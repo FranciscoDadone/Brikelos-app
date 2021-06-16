@@ -17,12 +17,13 @@ public class Connection {
      */
     public static java.sql.Connection connect() {
         java.sql.Connection con = null;
+        String dbPath = FileSystemView.getFileSystemView().getDefaultDirectory().getPath() + "/Brikelos/database";
         try {
-            File theDir = new File("database");
+            File theDir = new File(dbPath);
             if (!theDir.exists()){
                 theDir.mkdirs();
             }
-            con = DriverManager.getConnection("jdbc:sqlite:" + FileSystemView.getFileSystemView().getDefaultDirectory().getPath() + "/Brikelos/database/sqlite.db");
+            con = DriverManager.getConnection("jdbc:sqlite:" + dbPath + "/sqlite.db");
             ResultSet res = con.createStatement().executeQuery("SELECT name FROM sqlite_master WHERE type='table';");
             ArrayList<String> tables = new ArrayList<>();
             while(res.next()) {
