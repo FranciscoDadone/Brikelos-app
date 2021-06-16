@@ -87,7 +87,7 @@
               <borderPainted value="false"/>
               <contentAreaFilled value="false"/>
               <focusPainted value="false"/>
-              <font size="48"/>
+              <font size="28"/>
               <foreground color="-13290187"/>
               <hideActionText value="true"/>
               <text value="⚙️"/>
