@@ -7,6 +7,8 @@ import com.brikelos.model.queries.SellQueries;
 import com.brikelos.util.GUIHandler;
 import com.brikelos.util.Util;
 import com.brikelos.view.AddSellPanel;
+import com.brikelos.view.JCustomOptionPane;
+
 import javax.swing.*;
 import java.awt.event.*;
 import java.text.SimpleDateFormat;
@@ -17,6 +19,10 @@ public class AddSellController implements ActionListener, KeyListener {
 
     public AddSellController(AddSellPanel view) {
         this.view  = view;
+
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        view.sellDate.setText(formatter.format(new Date()));
+
         bindData();
     }
 
@@ -24,53 +30,39 @@ public class AddSellController implements ActionListener, KeyListener {
     public void actionPerformed(ActionEvent e) {
         if(e.getSource().equals(view.button)) {
             if(view.clientList.getSelectedValue() == null || view.clientList.getSelectedValue().toString().equals("null")) {
-                JOptionPane.showMessageDialog(
-                        null,
+                JCustomOptionPane.messageDialog(
                         "Tienes que seleccionar un cliente para asignarle la venta.",
                         "Advertencia",
                         JOptionPane.WARNING_MESSAGE
                 );
             } else if(view.sellTitle.getText() == null || view.sellTitle.getText().equals("")) {
-                JOptionPane.showMessageDialog(
-                        null,
+                JCustomOptionPane.messageDialog(
                         "El título no puede quedar en blanco.",
                         "Advertencia",
                         JOptionPane.WARNING_MESSAGE
                 );
             } else if(view.sellPrice.getText() == null || view.sellPrice.getText().equals("")) {
-                JOptionPane.showMessageDialog(
-                        null,
+                JCustomOptionPane.messageDialog(
                         "El precio no puede quedar en blanco.",
                         "Advertencia",
                         JOptionPane.WARNING_MESSAGE
                 );
             } else if(!Util.isNumeric(view.sellPrice.getText())) {
-                JOptionPane.showMessageDialog(
-                        null,
+                JCustomOptionPane.messageDialog(
                         "El precio tiene que ser un número.",
                         "Advertencia",
                         JOptionPane.WARNING_MESSAGE
                 );
             } else {
-                String date;
-                if(view.sellDate.getText() == null || view.sellDate.getText().equals("")) {
-                    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-                    date = formatter.format(new Date());
-                } else {
-                    date = view.sellDate.getText();
-                }
-
-                int reply = JOptionPane.showConfirmDialog(
-                        null,
+                int reply = JCustomOptionPane.confirmDialog(
                         "<html>"                                             +
-                                "¿Son correctos estos datos de la venta?"            + "<br>" +
-                                "Fecha: "       + date                               + "<br>" +
+                                "¿Son correctos estos datos de la venta?"            + "<br><br>" +
+                                "Fecha: "       + view.sellDate.getText()            + "<br>" +
                                 "Comprador: "   + view.clientList.getSelectedValue() + "<br>" +
                                 "Precio: "      + view.sellPrice.getText()           + "<br>" +
                                 "Título: "      + view.sellTitle.getText()           + "<br>" +
                                 "Descripción: " + view.sellDescription.getText(),
-                        "Confirmar datos",
-                        JOptionPane.YES_NO_OPTION
+                        "Confirmar datos"
                 );
 
                 if(reply == JOptionPane.YES_OPTION) {
@@ -79,13 +71,12 @@ public class AddSellController implements ActionListener, KeyListener {
                     double clientMoneySpent = ClientQueries.getTotalSpent(ClientQueries.getClientByName(view.clientList.getSelectedValue().toString()));
                     boolean success = SellQueries.addSell(new Sell(
                             clientID,
-                            date,
+                            view.sellDate.getText(),
                             view.sellTitle.getText(),
                             view.sellDescription.getText(),
                             Double.parseDouble(view.sellPrice.getText())
                     ));
-                    JOptionPane.showMessageDialog(
-                            null,
+                    JCustomOptionPane.messageDialog(
                             (success) ? "La venta de '" + view.sellTitle.getText() + "' fue guardada correctamente." : "Error al agregar cliente.",
                             (success) ? "Venta guardada." : "ERROR",
                             (success) ? JOptionPane.INFORMATION_MESSAGE : JOptionPane.ERROR_MESSAGE
@@ -93,8 +84,7 @@ public class AddSellController implements ActionListener, KeyListener {
                     if(success) {
                         double moneyAlertTrigger = ConfigQueries.getConfig().getMoneyAlert();
                         if((clientMoneySpent + sellPrice) >= moneyAlertTrigger) {
-                            JOptionPane.showMessageDialog(
-                                    null,
+                            JCustomOptionPane.messageDialog(
                                     view.clientList.getSelectedValue().toString() + " ha superado los $" + moneyAlertTrigger,
                                     "Información",
                                     JOptionPane.INFORMATION_MESSAGE

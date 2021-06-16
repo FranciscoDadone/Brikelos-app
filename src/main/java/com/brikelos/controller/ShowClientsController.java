@@ -96,6 +96,5 @@ public class ShowClientsController implements KeyListener, MouseListener {
     @Override
     public void mouseExited(MouseEvent e) {}
 
-
     private ShowClientsPanel view;
 }

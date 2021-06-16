@@ -5,6 +5,7 @@ import com.brikelos.model.queries.ClientQueries;
 import com.brikelos.util.GUIHandler;
 import com.brikelos.util.Util;
 import com.brikelos.view.AddClientPanel;
+import com.brikelos.view.JCustomOptionPane;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -22,15 +23,13 @@ public class AddClientController implements ActionListener {
          * Checks if the name and dni is empty and displays a warning.
          */
         if(view.nameAndSurname.getText().equals("")) {
-            JOptionPane.showMessageDialog(
-                    null,
+            JCustomOptionPane.messageDialog(
                     "El nombre no puede quedar en blanco.",
                     "Advertencia",
                     JOptionPane.WARNING_MESSAGE
             );
         } else if(!Util.isNumeric(view.dni.getText())) {
-            JOptionPane.showMessageDialog(
-                    null,
+            JCustomOptionPane.messageDialog(
                     "El DNI solo puede contener números.",
                     "Advertencia",
                     JOptionPane.WARNING_MESSAGE
@@ -57,15 +56,13 @@ public class AddClientController implements ActionListener {
              * it saves the information to the database.
              */
             if(error.length() != 0) {
-                JOptionPane.showMessageDialog(
-                        null,
+                JCustomOptionPane.messageDialog(
                         error,
                         "ERROR",
                         JOptionPane.ERROR_MESSAGE
                 );
             } else {
-                int reply = JOptionPane.showConfirmDialog(
-                        null,
+                int reply = JCustomOptionPane.confirmDialog(
                         "<html>"                                                       +
                                 "¿Son correctos estos datos?" +                         "<br>" +
                                 "Nombre y apellido: " + view.nameAndSurname.getText() + "<br>" +
@@ -73,13 +70,11 @@ public class AddClientController implements ActionListener {
                                 "Tel.: " + view.phoneNum.getText() +                    "<br>" +
                                 "Email: " + view.email.getText() +                      "<br>" +
                                 "</html>",
-                        "Confirmar datos",
-                        JOptionPane.YES_NO_OPTION
+                        "Confirmar datos"
                 );
                 if(reply == JOptionPane.YES_OPTION) {
                     boolean success = ClientQueries.addClient(client);
-                    JOptionPane.showMessageDialog(
-                            null,
+                    JCustomOptionPane.messageDialog(
                             (success) ? client.getName() + " fue agregado a la lista de clientes." : "Error al agregar cliente.",
                             (success) ? "Cliente agregado." : "ERROR",
                             (success) ? JOptionPane.INFORMATION_MESSAGE : JOptionPane.ERROR_MESSAGE

@@ -44,11 +44,11 @@ public class MainGUI extends JFrame {
         /**
          * Listeners
          */
-        addSellButton.addActionListener(new MainGUIController(this));
+        addSellButton.addActionListener    (new MainGUIController(this));
         showClientsButton.addActionListener(new MainGUIController(this));
-        newClientButton.addActionListener(new MainGUIController(this));
-        configButton.addActionListener(new MainGUIController(this));
-        configButton.addMouseListener(new MainGUIController(this));
+        newClientButton.addActionListener  (new MainGUIController(this));
+        configButton.addActionListener     (new MainGUIController(this));
+        configButton.addMouseListener      (new MainGUIController(this));
     }
 
 

@@ -2,7 +2,7 @@
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="com.brikelos.view.MainGUI">
   <grid id="27dc6" binding="mainPanel" layout-manager="BorderLayout" hgap="0" vgap="0">
     <constraints>
-      <xy x="20" y="20" width="1662" height="2072"/>
+      <xy x="20" y="20" width="1719" height="2325"/>
     </constraints>
     <properties>
       <background color="-2960686"/>
@@ -83,12 +83,13 @@
               <gridbag weightx="0.0" weighty="0.0"/>
             </constraints>
             <properties>
-              <background color="-57056"/>
+              <background color="-13290187"/>
               <borderPainted value="false"/>
               <contentAreaFilled value="false"/>
               <focusPainted value="false"/>
               <font size="48"/>
               <foreground color="-13290187"/>
+              <hideActionText value="true"/>
               <text value="⚙️"/>
             </properties>
           </component>

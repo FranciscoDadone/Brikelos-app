@@ -3,6 +3,7 @@ package com.brikelos.controller;
 import com.brikelos.model.queries.ConfigQueries;
 import com.brikelos.util.Util;
 import com.brikelos.view.ConfigPanel;
+import com.brikelos.view.JCustomOptionPane;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -18,15 +19,13 @@ public class ConfigController implements ActionListener {
         if(e.getSource().equals(view.saveButton)) {
             if(Util.isNumeric(view.moneyAlertField.getText())) {
                 ConfigQueries.setMoneyAlert(Double.parseDouble(view.moneyAlertField.getText()));
-                JOptionPane.showMessageDialog(
-                        null,
+                JCustomOptionPane.messageDialog(
                         "Configuración guardada exitosamente!",
                         "Configuración",
                         JOptionPane.INFORMATION_MESSAGE
                 );
             } else {
-                JOptionPane.showMessageDialog(
-                        null,
+                JCustomOptionPane.messageDialog(
                         "El valor de la alerta tiene que ser numérico.",
                         "Advertencia",
                         JOptionPane.WARNING_MESSAGE
