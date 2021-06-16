@@ -49,6 +49,10 @@ public class MainGUI extends JFrame {
         newClientButton.addActionListener  (new MainGUIController(this));
         configButton.addActionListener     (new MainGUIController(this));
         configButton.addMouseListener      (new MainGUIController(this));
+        newClientButton.addMouseListener   (new MainGUIController(this));
+        showClientsButton.addMouseListener (new MainGUIController(this));
+        addSellButton.addMouseListener     (new MainGUIController(this));
+
     }
 
 

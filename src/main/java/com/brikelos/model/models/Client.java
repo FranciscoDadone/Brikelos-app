@@ -4,7 +4,7 @@ import com.brikelos.model.queries.ClientQueries;
 
 public class Client {
 
-    public Client(String name, int dni, String email, String phone, double moneySpent) {
+    public Client(String name, long dni, String email, String phone, double moneySpent) {
         this.name       = name;
         this.dni        = dni;
         this.email      = email;
@@ -12,7 +12,7 @@ public class Client {
         this.moneySpent = moneySpent;
     }
 
-    public Client(int id, String name, int dni, String email, String phone, double moneySpent) {
+    public Client(int id, String name, long dni, String email, String phone, double moneySpent) {
         this.id         = id;
         this.name       = name;
         this.dni        = dni;
@@ -21,14 +21,14 @@ public class Client {
         this.moneySpent = moneySpent;
     }
 
-    public Client(String name, int dni, String email, String phone) {
+    public Client(String name, long dni, String email, String phone) {
         this.name  = name;
         this.dni   = dni;
         this.email = email;
         this.phone = phone;
     }
 
-    public Client(int id, String name, int dni, String email, String phone) {
+    public Client(int id, String name, long dni, String email, String phone) {
         this.id    = id;
         this.name  = name;
         this.dni   = dni;
@@ -49,7 +49,7 @@ public class Client {
         return name;
     }
 
-    public int getDni() {
+    public long getDni() {
         return dni;
     }
 
@@ -91,7 +91,7 @@ public class Client {
 
     private int    id;
     private String name;
-    private int    dni;
+    private long    dni;
     private String email;
     private String phone;
     private double moneySpent;

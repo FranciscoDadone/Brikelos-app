@@ -14,10 +14,10 @@ public class ClientQueries extends Connection {
         try {
             connection.createStatement().execute(
                     "INSERT INTO Clients (name, dni, phone, email, moneySpent) VALUES (" +
-                            "'" + client.getName() + "', "
-                            + client.getDni()            + ", "  +
-                            "'" + client.getPhone()       + "', " +
-                            "'" + client.getEmail()          + "', " +
+                            "'" + client.getName()  + "', "
+                                + client.getDni()   + ", "  +
+                            "'" + client.getPhone() + "', " +
+                            "'" + client.getEmail() + "', " +
                             "0" +
                             ");"
             );
@@ -48,7 +48,7 @@ public class ClientQueries extends Connection {
                 clients.add(new Client(
                         res.getInt("id"),
                         res.getString("name"),
-                        res.getInt("dni"),
+                        res.getLong("dni"),
                         res.getString("email"),
                         res.getString("phone"),
                         res.getDouble("moneySpent")
@@ -155,7 +155,7 @@ public class ClientQueries extends Connection {
                 return new Client(
                         res.getInt("id"),
                         res.getString("name"),
-                        res.getInt("dni"),
+                        res.getLong("dni"),
                         res.getString("email"),
                         res.getString("phone"),
                         res.getDouble("moneySpent")

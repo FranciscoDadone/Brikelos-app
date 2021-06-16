@@ -38,9 +38,7 @@ public class MainGUIController extends MouseAdapter implements ActionListener {
      */
     @Override
     public void mouseEntered(MouseEvent e) {
-        if(e.getSource().equals(view.configButton)) {
-            view.configButton.setForeground(Color.GRAY);
-        }
+        e.getComponent().setForeground(Color.GRAY);
     }
 
     /**
@@ -49,9 +47,7 @@ public class MainGUIController extends MouseAdapter implements ActionListener {
      */
     @Override
     public void mouseExited(MouseEvent e) {
-        if(e.getSource().equals(view.configButton)) {
-            view.configButton.setForeground(new Color(53, 53, 53));
-        }
+        e.getComponent().setForeground(new Color(53, 53, 53));
     }
 
     private MainGUI view;

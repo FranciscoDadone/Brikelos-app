@@ -36,7 +36,7 @@ public class AddClientController implements ActionListener {
             );
         } else {
             Client client = new Client(view.nameAndSurname.getText(),
-                    Integer.parseInt(view.dni.getText()),
+                    Long.parseLong(view.dni.getText()),
                     view.email.getText(),
                     view.phoneNum.getText()
             );

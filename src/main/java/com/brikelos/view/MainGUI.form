@@ -79,18 +79,18 @@
           </component>
           <component id="be031" class="javax.swing.JButton" binding="configButton">
             <constraints>
-              <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-              <gridbag weightx="0.0" weighty="0.0"/>
+              <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <gridbag top="10" left="0" bottom="0" right="0" weightx="0.0" weighty="0.0" ipadx="2" ipady="20"/>
             </constraints>
             <properties>
-              <background color="-13290187"/>
+              <background color="-1"/>
               <borderPainted value="false"/>
-              <contentAreaFilled value="false"/>
+              <contentAreaFilled value="true"/>
               <focusPainted value="false"/>
-              <font size="28"/>
+              <font size="28" style="1"/>
               <foreground color="-13290187"/>
               <hideActionText value="true"/>
-              <text value="⚙️"/>
+              <text value="CONFIGURACIÓN"/>
             </properties>
           </component>
         </children>

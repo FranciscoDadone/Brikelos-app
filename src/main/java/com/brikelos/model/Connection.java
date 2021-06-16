@@ -37,7 +37,7 @@ public class Connection {
                 statement.execute("CREATE TABLE Clients (" +
                                 "id INTEGER PRIMARY KEY AUTOINCREMENT," +
                                 "name VARCHAR(255) NOT NULL," +
-                                "dni INTEGER," +
+                                "dni LONG," +
                                 "phone VARCHAR(50)," +
                                 "email VARCHAR(100)," +
                                 "moneySpent DOUBLE" +
