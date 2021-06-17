@@ -3,6 +3,7 @@ package com.brikelos.util;
 import com.brikelos.view.MainGUI;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class GUIHandler {
 
@@ -22,5 +23,6 @@ public class GUIHandler {
         MainGUI.getContentPanel().add(newScreen);
         MainGUI.getContentPanel().revalidate();
         MainGUI.getContentPanel().repaint();
+        MainGUI.getContentPanel().setBackground(new Color(251, 235, 222));
     }
 }

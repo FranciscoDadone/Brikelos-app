@@ -2,10 +2,8 @@ package com.brikelos.view;
 
 import com.brikelos.controller.MainGUIController;
 import com.brikelos.util.GUIHandler;
-
 import javax.swing.*;
 import java.awt.*;
-import java.io.InputStream;
 
 public class MainGUI extends JFrame {
 
@@ -13,7 +11,7 @@ public class MainGUI extends JFrame {
      * Returns the contentPanel (panel in the center of the screen).
      * @return JPanel
      */
-    public static JPanel getContentPanel() {
+    public static JPanelBackground getContentPanel() {
         return contentPanel;
     }
 
@@ -30,14 +28,16 @@ public class MainGUI extends JFrame {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         /**
-         * Code to load the logo in the app icon (maybe not working now)
+         * Code to load the logo in the app icon.
          */
-        ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-        InputStream is = classloader.getResourceAsStream("logo.png");
-        this.setIconImage(Toolkit.getDefaultToolkit().getImage(String.valueOf(is)));
+        this.setIconImage(new ImageIcon(getClass().getResource("/images/logo.jpg")).getImage());
 
-        contentPanel = new JPanel();
+        /**
+         * Image as background
+         */
+        contentPanel = new JPanelBackground(new ImageIcon(getClass().getResource("/images/libros.jpg")).getImage().getScaledInstance(1613, 955, Image.SCALE_DEFAULT));
         mainPanel.add(new JScrollPane(contentPanel));
+
         this.setVisible(true);
         GUIHandler.changeScreen(new AddSellPanel().getPanel());
 
@@ -62,5 +62,5 @@ public class MainGUI extends JFrame {
     public JButton showClientsButton;
     private JPanel sidebar;
     public JButton configButton;
-    private static JPanel contentPanel;
+    private static JPanelBackground contentPanel;
 }
