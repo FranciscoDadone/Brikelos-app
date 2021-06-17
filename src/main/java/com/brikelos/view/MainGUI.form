@@ -9,7 +9,7 @@
     </properties>
     <border type="none"/>
     <children>
-      <grid id="1be0f" layout-manager="BorderLayout" hgap="0" vgap="0">
+      <grid id="1be0f" layout-manager="BorderLayout" hgap="20" vgap="0">
         <constraints border-constraint="North"/>
         <properties>
           <background color="-9811905"/>
@@ -26,6 +26,9 @@
               <text value="Brikelos"/>
             </properties>
           </component>
+          <hspacer id="1229f">
+            <constraints border-constraint="West"/>
+          </hspacer>
         </children>
       </grid>
       <grid id="51e24" binding="sidebar" layout-manager="GridBagLayout">
