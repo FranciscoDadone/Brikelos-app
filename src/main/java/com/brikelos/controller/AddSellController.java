@@ -8,10 +8,11 @@ import com.brikelos.util.GUIHandler;
 import com.brikelos.util.Util;
 import com.brikelos.view.AddSellPanel;
 import com.brikelos.view.JCustomOptionPane;
-
 import javax.swing.*;
 import java.awt.event.*;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 
 public class AddSellController implements ActionListener, KeyListener {
@@ -54,28 +55,24 @@ public class AddSellController implements ActionListener, KeyListener {
                         JOptionPane.WARNING_MESSAGE
                 );
             } else {
+                int clientID = ClientQueries.getIdByName(view.clientList.getSelectedValue().toString());
+                Sell sell = new Sell(
+                        clientID,
+                        view.sellDate.getText(),
+                        view.sellTitle.getText(),
+                        view.sellDescription.getText(),
+                        Double.parseDouble(view.sellPrice.getText())
+                );
+
                 int reply = JCustomOptionPane.confirmDialog(
-                        "<html>"                                             +
-                                "¿Son correctos estos datos de la venta?"            + "<br><br>" +
-                                "Fecha: "       + view.sellDate.getText()            + "<br>" +
-                                "Comprador: "   + view.clientList.getSelectedValue() + "<br>" +
-                                "Precio: "      + view.sellPrice.getText()           + "<br>" +
-                                "Título: "      + view.sellTitle.getText()           + "<br>" +
-                                "Descripción: " + view.sellDescription.getText(),
-                        "Confirmar datos"
+                        sell
                 );
 
                 if(reply == JOptionPane.YES_OPTION) {
-                    int clientID = ClientQueries.getIdByName(view.clientList.getSelectedValue().toString());
                     double sellPrice        = Double.parseDouble(view.sellPrice.getText());
                     double clientMoneySpent = ClientQueries.getTotalSpent(ClientQueries.getClientByName(view.clientList.getSelectedValue().toString()));
-                    boolean success = SellQueries.addSell(new Sell(
-                            clientID,
-                            view.sellDate.getText(),
-                            view.sellTitle.getText(),
-                            view.sellDescription.getText(),
-                            Double.parseDouble(view.sellPrice.getText())
-                    ));
+
+                    boolean success = SellQueries.addSell(sell);
                     JCustomOptionPane.messageDialog(
                             (success) ? "La venta de '" + view.sellTitle.getText() + "' fue guardada correctamente." : "Error al agregar cliente.",
                             (success) ? "Venta guardada." : "ERROR",

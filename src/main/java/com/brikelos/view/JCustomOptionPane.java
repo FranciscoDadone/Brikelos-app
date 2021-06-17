@@ -1,8 +1,13 @@
 package com.brikelos.view;
 
+import com.brikelos.model.models.Sell;
+import com.brikelos.model.queries.ClientQueries;
+
 import javax.swing.*;
 import javax.swing.plaf.FontUIResource;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class JCustomOptionPane {
 
@@ -35,6 +40,49 @@ public class JCustomOptionPane {
                 null,
                 new JLabelFont(txt, new Font("Arial", Font.BOLD, 24)),
                 title,
+                JOptionPane.YES_NO_CANCEL_OPTION,
+                JOptionPane.PLAIN_MESSAGE,
+                null,
+                options,
+                null
+        );
+        return result;
+    }
+
+    /**
+     * Confirm dialog for the purchase.
+     * @param sell
+     * @return
+     */
+    public static int confirmDialog(Sell sell) {
+        String description = "";
+        for(String s: Arrays.asList(sell.getDescription().split("\\r?\\n"))) {
+            if(s.length() >= 80) {
+                int index = 0;
+                while (index < s.length()) {
+                    description += (s.substring(index, Math.min(index + 80,s.length())) + "<br>");
+                    index += 80;
+                }
+            } else {
+                description += s + "<br>";
+            }
+        }
+
+        String txt =
+                "<html><b>¿Son correctos estos datos de la venta?</b><br><br>"          +
+                "<b>Fecha</b>: "       + sell.getDate()                                 + "<br>" +
+                "<b>Comprador</b>: "   + ClientQueries.getClientById(sell.getBuyerID()) + "<br>" +
+                "<b>Precio</b>: "      + sell.getPrice()                                + "<br>" +
+                "<b>Título</b>: "      + sell.getTitle()                                + "<br>" +
+                "<b>Descripción</b>: <br>" + description                                + "</html>";
+
+        Object[] options = { "Si", "No", "Cancelar" };
+        UIManager.put("OptionPane.buttonFont", new FontUIResource(new Font("ARIAL",Font.PLAIN,20)));
+
+        int result = JOptionPane.showOptionDialog(
+                null,
+                new JLabelFont(txt, new Font("Arial", Font.PLAIN, 24)),
+                "Confirmar datos",
                 JOptionPane.YES_NO_CANCEL_OPTION,
                 JOptionPane.PLAIN_MESSAGE,
                 null,

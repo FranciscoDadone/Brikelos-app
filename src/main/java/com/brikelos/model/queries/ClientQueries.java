@@ -210,4 +210,33 @@ public class ClientQueries extends Connection {
             }
         }
     }
+
+
+    public static Client getClientById(int id) {
+        java.sql.Connection connection = connect();
+        try {
+            ResultSet res = connection.createStatement().executeQuery(
+                    "SELECT * FROM Clients WHERE (id='" + id + "');"
+            );
+            if(res.next()) {
+                return new Client(
+                        res.getInt("id"),
+                        res.getString("name"),
+                        res.getLong("dni"),
+                        res.getString("email"),
+                        res.getString("phone"),
+                        res.getDouble("moneySpent")
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
 }
