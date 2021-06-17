@@ -57,7 +57,7 @@ public class JCustomOptionPane {
     public static int confirmDialog(Sell sell) {
         String description = "";
         for(String s: Arrays.asList(sell.getDescription().split("\\r?\\n"))) {
-            if(s.length() >= 80) {
+            if(s.length() > 80) {
                 int index = 0;
                 while (index < s.length()) {
                     description += (s.substring(index, Math.min(index + 80,s.length())) + "<br>");

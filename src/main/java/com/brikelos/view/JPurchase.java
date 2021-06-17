@@ -29,7 +29,7 @@ public class JPurchase extends JPanel {
         this.add(new JLabelFont("<html><b>Descripción:</b></html>", font));
 
         for(String s: Arrays.asList(description.split("\n"))) {
-            if(s.length() >= 80) {
+            if(s.length() > 80) {
                 int index = 0;
                 while (index < s.length()) {
                     this.add(new JLabelFont((s.substring(index, Math.min(index + 80, s.length()))), font));
