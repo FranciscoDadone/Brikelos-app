@@ -134,21 +134,9 @@
               <text value=""/>
             </properties>
           </component>
-          <component id="3627a" class="javax.swing.JLabel" binding="clientDNI">
-            <constraints>
-              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-              <gridbag weightx="0.0" weighty="0.0"/>
-            </constraints>
-            <properties>
-              <font size="20"/>
-              <horizontalAlignment value="2"/>
-              <horizontalTextPosition value="2"/>
-              <text value=""/>
-            </properties>
-          </component>
           <component id="63480" class="javax.swing.JLabel" binding="clientPhone">
             <constraints>
-              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
               <gridbag weightx="0.0" weighty="0.0"/>
             </constraints>
             <properties>
@@ -158,21 +146,9 @@
               <text value="Selecciona un cliente para ver sus datos"/>
             </properties>
           </component>
-          <component id="e5b92" class="javax.swing.JLabel" binding="clientEmail">
-            <constraints>
-              <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-              <gridbag weightx="0.0" weighty="0.0"/>
-            </constraints>
-            <properties>
-              <font size="20"/>
-              <horizontalAlignment value="2"/>
-              <horizontalTextPosition value="2"/>
-              <text value=""/>
-            </properties>
-          </component>
           <component id="2091b" class="javax.swing.JLabel" binding="clientTotalSpent">
             <constraints>
-              <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
               <gridbag weightx="0.0" weighty="0.0"/>
             </constraints>
             <properties>

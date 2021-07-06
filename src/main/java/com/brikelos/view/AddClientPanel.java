@@ -8,9 +8,9 @@ public class AddClientPanel {
 
     private JPanel panel;
     public JTextField nameAndSurname;
-    public JTextField dni;
+//    public JTextField dni;
     public JTextField phoneNum;
-    public JTextField email;
+//    public JTextField email;
     public JButton saveButton;
 
     public AddClientPanel() {

@@ -36,8 +36,6 @@ public class ShowClientsPanel {
     public JList listOfClients;
     public JPanel purchasesPanel;
     public JLabel clientName;
-    public JLabel clientDNI;
     public JLabel clientPhone;
-    public JLabel clientEmail;
     public JLabel clientTotalSpent;
 }

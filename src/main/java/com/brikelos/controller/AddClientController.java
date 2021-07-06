@@ -3,7 +3,6 @@ package com.brikelos.controller;
 import com.brikelos.model.models.Client;
 import com.brikelos.model.queries.ClientQueries;
 import com.brikelos.util.GUIHandler;
-import com.brikelos.util.Util;
 import com.brikelos.view.AddClientPanel;
 import com.brikelos.view.JCustomOptionPane;
 
@@ -28,16 +27,17 @@ public class AddClientController implements ActionListener {
                     "Advertencia",
                     JOptionPane.WARNING_MESSAGE
             );
-        } else if(!Util.isNumeric(view.dni.getText())) {
-            JCustomOptionPane.messageDialog(
-                    "El DNI solo puede contener números.",
-                    "Advertencia",
-                    JOptionPane.WARNING_MESSAGE
-            );
+//        } else if(!Util.isNumeric(view.dni.getText())) {
+//            JCustomOptionPane.messageDialog(
+//                    "El DNI solo puede contener números.",
+//                    "Advertencia",
+//                    JOptionPane.WARNING_MESSAGE
+//            );
+//        } else {
         } else {
             Client client = new Client(view.nameAndSurname.getText(),
-                    Long.parseLong(view.dni.getText()),
-                    view.email.getText(),
+//                    Long.parseLong(view.dni.getText()),
+//                    view.email.getText(),
                     view.phoneNum.getText()
             );
             String error = "";
@@ -46,9 +46,9 @@ public class AddClientController implements ActionListener {
                 error = "Ya hay un cliente registrado con ese nombre.";
             }
 
-            if(ClientQueries.sameDni(client)) {
-                error = "Ya hay un cliente registrado con ese DNI.";
-            }
+//            if(ClientQueries.sameDni(client)) {
+//                error = "Ya hay un cliente registrado con ese DNI.";
+//            }
 
             /**
              * If there are errors, it display a warning to the user.
@@ -66,9 +66,9 @@ public class AddClientController implements ActionListener {
                         "<html>"                                                       +
                                 "¿Son correctos estos datos?" +                         "<br>" +
                                 "Nombre y apellido: " + view.nameAndSurname.getText() + "<br>" +
-                                "DNI: " + view.dni.getText() +                          "<br>" +
+//                                "DNI: " + view.dni.getText() +                          "<br>" +
                                 "Tel.: " + view.phoneNum.getText() +                    "<br>" +
-                                "Email: " + view.email.getText() +                      "<br>" +
+//                                "Email: " + view.email.getText() +                      "<br>" +
                                 "</html>",
                         "Confirmar datos"
                 );

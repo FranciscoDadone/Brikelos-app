@@ -59,8 +59,8 @@ public class ShowClientsController implements KeyListener, MouseListener {
         Client client = ClientQueries.getClientByName(view.listOfClients.getSelectedValue().toString());
 
         view.clientName.setText("Nombre: " + client.getName());
-        view.clientDNI.setText("DNI: " + client.getDni());
-        view.clientEmail.setText("Email: " + client.getEmail());
+//        view.clientDNI.setText("DNI: " + client.getDni());
+//        view.clientEmail.setText("Email: " + client.getEmail());
         view.clientPhone.setText("Tel.: " + client.getPhone());
         view.clientTotalSpent.setText("Total gastado: $" + client.getMoneySpent());
 

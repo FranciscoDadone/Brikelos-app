@@ -129,7 +129,7 @@ public class AddSellController implements ActionListener, KeyListener {
         DefaultListModel filteredItems = new DefaultListModel();
         ClientQueries.getAllClients().forEach((client) -> {
             String name = client.getName().toLowerCase();
-            if(Util.isNumeric(searchTerm) && client.getDni() == Integer.parseInt(searchTerm) || name.contains(searchTerm.toLowerCase())) {
+            if(name.contains(searchTerm.toLowerCase())) {
                 filteredItems.addElement(client);
             }
         });
