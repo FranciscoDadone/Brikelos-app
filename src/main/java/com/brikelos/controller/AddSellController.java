@@ -90,6 +90,13 @@ public class AddSellController implements ActionListener, KeyListener {
                             while(clientBalance >= moneyAlertTrigger) {
                                 clientBalance -= moneyAlertTrigger;
                             }
+
+                            ClientQueries.setMoneySpent(
+                                    clientID,
+                                    clientBalance
+                            );
+                        } else {
+                            double clientBalance = sellPrice + clientMoneySpent;
                             ClientQueries.setMoneySpent(
                                     clientID,
                                     clientBalance
