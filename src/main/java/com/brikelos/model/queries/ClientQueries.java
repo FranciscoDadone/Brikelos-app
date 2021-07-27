@@ -93,32 +93,6 @@ public class ClientQueries extends Connection {
     }
 
     /**
-     * Checks if the same DNI already exists in the database.
-     */
-//    public static boolean sameDni(Client client) {
-//        java.sql.Connection connection = connect();
-//        try {
-//            ResultSet res = connection.createStatement().executeQuery(
-//                    "SELECT * FROM Clients WHERE (dni=" + client.getDni() + ");"
-//            );
-//            if(res.next()) {
-//                return true;
-//            }
-//            return false;
-//        } catch (SQLException e1) {
-//            e1.printStackTrace();
-//        } finally {
-//            try {
-//                connection.close();
-//            } catch (SQLException e) {
-//                e.printStackTrace();
-//                return false;
-//            }
-//        }
-//        return true;
-//    }
-
-    /**
      * Returns the client id by the name.
      * If it doesn't exits it returns -1.
      * @param name
@@ -155,8 +129,6 @@ public class ClientQueries extends Connection {
                 return new Client(
                         res.getInt("id"),
                         res.getString("name"),
-//                        res.getLong("dni"),
-//                        res.getString("email"),
                         res.getString("phone"),
                         res.getDouble("moneySpent")
                 );
@@ -222,8 +194,6 @@ public class ClientQueries extends Connection {
                 return new Client(
                         res.getInt("id"),
                         res.getString("name"),
-//                        res.getLong("dni"),
-//                        res.getString("email"),
                         res.getString("phone"),
                         res.getDouble("moneySpent")
                 );
@@ -239,4 +209,25 @@ public class ClientQueries extends Connection {
         }
         return null;
     }
+
+    public static void modifyClientInfo(int clientID, Client modifiedClient) {
+        java.sql.Connection connection = connect();
+        try {
+            connection.createStatement().execute(
+                    "UPDATE Clients SET name='" + modifiedClient.getName() + "' WHERE id=" + clientID + ";"
+            );
+            connection.createStatement().execute(
+                    "UPDATE Clients SET phone=" + modifiedClient.getPhone() + " WHERE id=" + clientID + ";"
+            );
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 }

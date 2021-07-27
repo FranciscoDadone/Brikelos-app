@@ -109,6 +109,14 @@
               <text value="Datos del cliente"/>
             </properties>
           </component>
+          <component id="948ad" class="javax.swing.JButton" binding="editClientBtn">
+            <constraints border-constraint="East"/>
+            <properties>
+              <enabled value="false"/>
+              <font size="20" style="1"/>
+              <text value="Editar cliente"/>
+            </properties>
+          </component>
         </children>
       </grid>
       <grid id="dff0c" layout-manager="GridBagLayout">

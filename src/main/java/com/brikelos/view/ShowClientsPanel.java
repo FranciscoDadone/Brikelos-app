@@ -21,6 +21,7 @@ public class ShowClientsPanel {
          */
         searchClients.addKeyListener(new ShowClientsController(this));
         listOfClients.addMouseListener(new ShowClientsController(this));
+        editClientBtn.addActionListener(new ShowClientsController(this));
 
         purchasesPanel.setLayout(new BoxLayout(purchasesPanel, BoxLayout.PAGE_AXIS));
 
@@ -38,4 +39,5 @@ public class ShowClientsPanel {
     public JLabel clientName;
     public JLabel clientPhone;
     public JLabel clientTotalSpent;
+    public JButton editClientBtn;
 }
