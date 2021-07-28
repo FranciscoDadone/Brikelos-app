@@ -1,6 +1,7 @@
 package com.brikelos.controller;
 
 import com.brikelos.model.models.Purchase;
+import com.brikelos.model.queries.ClientQueries;
 import com.brikelos.model.queries.SellQueries;
 import com.brikelos.util.GUIHandler;
 import com.brikelos.util.Util;
@@ -46,6 +47,21 @@ public class EditPurchase implements ActionListener {
             if(Util.isNumeric(price.getText())) {
                 purchase.setTitle(title.getText());
                 purchase.setDescription(description.getText());
+
+                if(purchase.getPrice() != Double.parseDouble(price.getText())) {
+
+                    double newPrice = Double.parseDouble(price.getText());
+                    double oldPrice = purchase.getPrice();
+                    double clientMoney = ClientQueries.getClientById(purchase.getBuyerID()).getMoneySpent();
+
+                    double newBal = Math.abs((clientMoney - oldPrice) + newPrice);
+
+                    ClientQueries.setMoneySpent(
+                            purchase.getBuyerID(),
+                            newBal
+                            );
+                }
+
                 purchase.setPrice(Double.parseDouble(price.getText()));
 
                 SellQueries.modifySellInfo(purchase.getId(), purchase);

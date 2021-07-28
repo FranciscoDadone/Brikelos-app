@@ -64,8 +64,7 @@ public class ShowClientsController implements KeyListener, MouseListener, Action
                 view.purchasesPanel.add(
                         new JPurchase(
                                 i.get(),
-                                purchase,
-                                view
+                                purchase
                         )
                 );
             });

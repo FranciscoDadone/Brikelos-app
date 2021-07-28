@@ -1,7 +1,9 @@
 package com.brikelos.controller;
 
 import com.brikelos.model.models.Purchase;
-import com.brikelos.view.JPurchase;
+import com.brikelos.model.queries.ClientQueries;
+import com.brikelos.model.queries.SellQueries;
+import com.brikelos.view.JCustomOptionPane;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -15,10 +17,19 @@ public class DeletePurchase implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
+        int res = JCustomOptionPane.confirmDialog("<html>Seguro que quiere eliminar la compra:<br>" + purchase.getTitle() + "</html>", "Confirmación");
 
+        if(res == JOptionPane.YES_OPTION) {
+            SellQueries.deletePurchase(purchase);
 
+            double purchasePrice = purchase.getPrice();
+            double clientMoney = ClientQueries.getClientById(purchase.getBuyerID()).getMoneySpent();
+            double newBal = Math.abs(clientMoney - purchasePrice);
+
+            ClientQueries.setMoneySpent(purchase.getBuyerID(), newBal);
+            ShowClientsController.displayClientInfo();
+
+        }
     }
-
-
     private Purchase purchase;
 }
