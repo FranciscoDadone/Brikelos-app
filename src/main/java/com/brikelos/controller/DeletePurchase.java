@@ -17,7 +17,9 @@ public class DeletePurchase implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        int res = JCustomOptionPane.confirmDialog("<html>Seguro que quiere eliminar la compra:<br>" + purchase.getTitle() + "</html>", "Confirmación");
+        int res = JCustomOptionPane.confirmDialog(
+                "<html>Seguro que quiere eliminar la compra:<br><b>" + purchase.getTitle() + "</b><br>" +
+                        "Del cliente: <b>" + ClientQueries.getClientById(purchase.getBuyerID()) + "</b></html>", "Confirmación");
 
         if(res == JOptionPane.YES_OPTION) {
             SellQueries.deletePurchase(purchase);
@@ -27,8 +29,7 @@ public class DeletePurchase implements ActionListener {
             double newBal = Math.abs(clientMoney - purchasePrice);
 
             ClientQueries.setMoneySpent(purchase.getBuyerID(), newBal);
-            ShowClientsController.displayClientInfo();
-
+            ShowClientsController.displayClientInfo(Cache.selectedClient);
         }
     }
     private Purchase purchase;

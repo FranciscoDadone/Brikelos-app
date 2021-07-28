@@ -46,7 +46,7 @@ public class Client {
     }
 
     public double getMoneySpent() {
-        return ClientQueries.getTotalSpent(this);
+        return this.moneySpent;
     }
 
     public void setId(int id) {

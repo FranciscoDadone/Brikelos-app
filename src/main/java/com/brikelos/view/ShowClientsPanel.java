@@ -1,5 +1,6 @@
 package com.brikelos.view;
 
+import com.brikelos.controller.DeleteClient;
 import com.brikelos.controller.ShowClientsController;
 import org.jdesktop.swingx.prompt.PromptSupport;
 
@@ -22,6 +23,7 @@ public class ShowClientsPanel {
         searchClients.addKeyListener(new ShowClientsController(this));
         listOfClients.addMouseListener(new ShowClientsController(this));
         editClientBtn.addActionListener(new ShowClientsController(this));
+        deleteClient.addActionListener(new DeleteClient(this));
 
         purchasesPanel.setLayout(new BoxLayout(purchasesPanel, BoxLayout.PAGE_AXIS));
 
@@ -40,4 +42,5 @@ public class ShowClientsPanel {
     public JLabel clientPhone;
     public JLabel clientTotalSpent;
     public JButton editClientBtn;
+    public JButton deleteClient;
 }

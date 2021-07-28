@@ -100,7 +100,6 @@ public class SellQueries extends Connection {
     }
 
     public static void deletePurchase(Purchase purchase) {
-
         java.sql.Connection connection = connect();
         try {
             connection.createStatement().execute(
@@ -116,7 +115,5 @@ public class SellQueries extends Connection {
                 e.printStackTrace();
             }
         }
-
     }
-
 }

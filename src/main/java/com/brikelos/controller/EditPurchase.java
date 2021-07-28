@@ -65,7 +65,7 @@ public class EditPurchase implements ActionListener {
                 purchase.setPrice(Double.parseDouble(price.getText()));
 
                 SellQueries.modifySellInfo(purchase.getId(), purchase);
-                ShowClientsController.displayClientInfo();
+                ShowClientsController.displayClientInfo(Cache.selectedClient);
 
             } else {
                 JCustomOptionPane.messageDialog(

@@ -217,7 +217,10 @@ public class ClientQueries extends Connection {
                     "UPDATE Clients SET name='" + modifiedClient.getName() + "' WHERE id=" + clientID + ";"
             );
             connection.createStatement().execute(
-                    "UPDATE Clients SET phone=" + modifiedClient.getPhone() + " WHERE id=" + clientID + ";"
+                    "UPDATE Clients SET phone='" + modifiedClient.getPhone() + "' WHERE id=" + clientID + ";"
+            );
+            connection.createStatement().execute(
+                    "UPDATE Clients SET moneySpent=" + modifiedClient.getMoneySpent() + " WHERE id=" + clientID + ";"
             );
         } catch (SQLException e) {
             e.printStackTrace();
@@ -230,4 +233,20 @@ public class ClientQueries extends Connection {
         }
     }
 
+    public static void deleteClient(Client client) {
+        java.sql.Connection connection = connect();
+        try {
+            connection.createStatement().execute(
+                    "DELETE FROM Clients WHERE id=" + client.getId() + ";"
+            );
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

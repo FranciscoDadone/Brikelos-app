@@ -1,8 +1,11 @@
 package com.brikelos.controller;
 
+import com.brikelos.model.models.Client;
 import com.brikelos.model.models.Purchase;
 import com.brikelos.model.queries.ClientQueries;
 import com.brikelos.model.queries.SellQueries;
+import com.brikelos.util.Util;
+import com.brikelos.view.JCustomOptionPane;
 import com.brikelos.view.JLabelFont;
 import com.brikelos.view.JPurchase;
 import com.brikelos.view.ShowClientsPanel;
@@ -16,15 +19,16 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class ShowClientsController implements KeyListener, MouseListener, ActionListener {
 
-    DefaultListModel defaultListModel = new DefaultListModel();
+    static DefaultListModel defaultListModel = new DefaultListModel();
 
     public ShowClientsController(ShowClientsPanel view) {
         this.view = view;
         bindData();
     }
 
-    private void bindData() {
+    public static void bindData() {
         defaultListModel.removeAllElements();
+        view.listOfClients.removeAll();
         ClientQueries.getAllClients().stream().forEach((star) -> {
             defaultListModel.addElement(star);
         });
@@ -47,32 +51,40 @@ public class ShowClientsController implements KeyListener, MouseListener, Action
         view.listOfClients.setModel(defaultListModel);
     }
 
-    public static void displayClientInfo() {
+    public static void displayClientInfo(Client client) {
         view.purchasesPanel.removeAll();
-        if(view.listOfClients.getSelectedValue() != null) {
-            Cache.selectedClient = ClientQueries.getClientByName(view.listOfClients.getSelectedValue().toString());
+        if(client != null) {
+            if(view.listOfClients.getSelectedValue() != null) {
+                Cache.selectedClient = client;
 
-            view.clientName.setText("Nombre: " + Cache.selectedClient.getName());
-            view.clientPhone.setText("Tel.: " + Cache.selectedClient.getPhone());
-            view.clientTotalSpent.setText("Total gastado: $" + Cache.selectedClient.getMoneySpent());
+                view.clientName.setText("Nombre: " + Cache.selectedClient.getName());
+                view.clientPhone.setText("Tel.: " + Cache.selectedClient.getPhone());
+                view.clientTotalSpent.setText("Total gastado: $" + Cache.selectedClient.getMoneySpent());
 
-            ArrayList<Purchase> clientPurchases = SellQueries.getAllClientSells(Cache.selectedClient);
+                ArrayList<Purchase> clientPurchases = SellQueries.getAllClientSells(Cache.selectedClient);
 
-            AtomicInteger i = new AtomicInteger();
-            clientPurchases.forEach((purchase) -> {
-                i.getAndIncrement();
-                view.purchasesPanel.add(
-                        new JPurchase(
-                                i.get(),
-                                purchase
-                        )
-                );
-            });
-            view.editClientBtn.setEnabled(true);
-            view.purchasesPanel.revalidate();
-            view.purchasesPanel.repaint();
+                AtomicInteger i = new AtomicInteger();
+                clientPurchases.forEach((purchase) -> {
+                    i.getAndIncrement();
+                    view.purchasesPanel.add(
+                            new JPurchase(
+                                    i.get(),
+                                    purchase
+                            )
+                    );
+                });
+                view.editClientBtn.setEnabled(true);
+                view.deleteClient.setEnabled(true);
+                view.purchasesPanel.revalidate();
+                view.purchasesPanel.repaint();
+            } else {
+                view.editClientBtn.setEnabled(false);
+                view.deleteClient.setEnabled(false);
+            }
         } else {
-            view.editClientBtn.setEnabled(false);
+            view.clientName.setText("Selecciona un cliente para ver sus datos.");
+            view.clientPhone.setText("");
+            view.clientTotalSpent.setText("");
         }
     }
 
@@ -83,7 +95,9 @@ public class ShowClientsController implements KeyListener, MouseListener, Action
     }
     @Override
     public void mouseClicked(MouseEvent e) {
-        displayClientInfo();
+        try {
+            displayClientInfo(ClientQueries.getClientByName(view.listOfClients.getSelectedValue().toString()));
+        } catch (Exception e1) {}
     }
 
     @Override
@@ -91,28 +105,44 @@ public class ShowClientsController implements KeyListener, MouseListener, Action
         if(e.getSource().equals(view.editClientBtn)) {
             JTextField name = new JTextField(20);
             JTextField phone = new JTextField();
+            JTextField money = new JTextField();
+
             JLabelFont nameTxt = new JLabelFont("Nombre", new Font("Arial", Font.PLAIN, 24));
             JLabelFont telTxt = new JLabelFont("Teléfono", new Font("Arial", Font.PLAIN, 24));
+            JLabelFont moneyTxt = new JLabelFont("Dinero gastado", new Font("Arial", Font.PLAIN, 24));
 
             Object[] fields = {
                     nameTxt, name,
-                    telTxt, phone
+                    telTxt, phone,
+                    moneyTxt, money
             };
             name.setFont(new Font("Arial", Font.PLAIN, 24));
             name.setText(Cache.selectedClient.getName());
             phone.setFont(new Font("Arial", Font.PLAIN, 24));
             phone.setText(Cache.selectedClient.getPhone());
+            money.setFont(new Font("Arial", Font.PLAIN, 24));
+            money.setText(String.valueOf(Cache.selectedClient.getMoneySpent()));
 
             UIManager.put("OptionPane.buttonFont", new FontUIResource(new Font("ARIAL",Font.PLAIN,20)));
             int res = JOptionPane.showConfirmDialog(null, fields, "Editar cliente", JOptionPane.OK_CANCEL_OPTION);
 
             if(res == JOptionPane.YES_OPTION) {
-                Cache.selectedClient.setName(name.getText());
-                Cache.selectedClient.setPhone(phone.getText());
-                ClientQueries.modifyClientInfo(Cache.selectedClient.getId(), Cache.selectedClient);
-                bindData();
-                view.clientName.setText("Nombre: " + Cache.selectedClient.getName());
-                view.clientPhone.setText("Tel.: " + Cache.selectedClient.getPhone());
+                if(Util.isNumeric(money.getText())) {
+                    Cache.selectedClient.setName(name.getText());
+                    Cache.selectedClient.setPhone(phone.getText());
+                    Cache.selectedClient.setMoneySpent(Double.parseDouble(money.getText()));
+                    ClientQueries.modifyClientInfo(Cache.selectedClient.getId(), Cache.selectedClient);
+                    bindData();
+                    view.clientName.setText("Nombre: " + Cache.selectedClient.getName());
+                    view.clientPhone.setText("Tel.: " + Cache.selectedClient.getPhone());
+                    view.clientTotalSpent.setText("Total gastado: $" + Cache.selectedClient.getMoneySpent());
+                } else {
+                    JCustomOptionPane.messageDialog(
+                            "Error, el monto de dinero tiene que ser numérico.",
+                            "Error",
+                            JOptionPane.ERROR_MESSAGE
+                    );
+                }
             }
         }
     }

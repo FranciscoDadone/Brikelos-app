@@ -37,7 +37,7 @@ public class JCustomOptionPane {
         UIManager.put("OptionPane.buttonFont", new FontUIResource(new Font("ARIAL",Font.PLAIN,20)));
         int result = JOptionPane.showOptionDialog(
                 null,
-                new JLabelFont(txt, new Font("Arial", Font.BOLD, 24)),
+                new JLabelFont(txt, new Font("Arial", Font.PLAIN, 24)),
                 title,
                 JOptionPane.YES_NO_CANCEL_OPTION,
                 JOptionPane.PLAIN_MESSAGE,

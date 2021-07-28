@@ -109,14 +109,31 @@
               <text value="Datos del cliente"/>
             </properties>
           </component>
-          <component id="948ad" class="javax.swing.JButton" binding="editClientBtn">
+          <grid id="85821" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
             <constraints border-constraint="East"/>
             <properties>
-              <enabled value="false"/>
-              <font size="20" style="1"/>
-              <text value="Editar cliente"/>
+              <background color="-267298"/>
             </properties>
-          </component>
+            <border type="none"/>
+            <children>
+              <component id="948ad" class="javax.swing.JButton" binding="editClientBtn">
+                <constraints/>
+                <properties>
+                  <enabled value="false"/>
+                  <font size="20" style="1"/>
+                  <text value="Editar cliente"/>
+                </properties>
+              </component>
+              <component id="10e64" class="javax.swing.JButton" binding="deleteClient">
+                <constraints/>
+                <properties>
+                  <enabled value="false"/>
+                  <font size="20" style="1"/>
+                  <text value="🗑️"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
         </children>
       </grid>
       <grid id="dff0c" layout-manager="GridBagLayout">
