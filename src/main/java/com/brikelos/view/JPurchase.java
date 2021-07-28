@@ -53,7 +53,7 @@ public class JPurchase extends JPanel {
 
         editBtn = new JButton("Editar");
         editBtn.setFont(font);
-        deleteBtn = new JButton("\uD83D\uDDD1️");
+        deleteBtn = new JButton("Eliminar️");
         deleteBtn.setFont(font);
 
         buttons.setLayout(new FlowLayout(FlowLayout.RIGHT));
