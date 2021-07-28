@@ -13,13 +13,13 @@ También existe la pestaña configuración en la cual se puede poner un monto de
   ![](github/imgs/agregarCliente.png)
   
 - Lista de clientes
-![](github/imgs/listaClientes.png)
+  ![](github/imgs/listaClientes.png)
   
 - Configuración
-![](github/imgs/configuracion.png)
+  ![](github/imgs/configuracion.png)
   
 - Editar clientes
-![](github/imgs/editarCliente.png)
+  ![](github/imgs/editarCliente.png)
   
 - Editar ventas
-![](github/imgs/editarVenta.png)
+  ![](github/imgs/editarVenta.png)
