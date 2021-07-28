@@ -1,8 +1,16 @@
 package com.brikelos.model.models;
 
-public class Sell {
+public class Purchase {
 
-    public Sell(int buyerID, String date, String title, String description, double price) {
+    public Purchase(int id, int buyerID, String date, String title, String description, double price) {
+        this.id          = id;
+        this.buyerID     = buyerID;
+        this.date        = date;
+        this.title       = title;
+        this.description = description;
+        this.price       = price;
+    }
+    public Purchase(int buyerID, String date, String title, String description, double price) {
         this.buyerID     = buyerID;
         this.date        = date;
         this.title       = title;

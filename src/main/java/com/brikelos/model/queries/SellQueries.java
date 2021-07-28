@@ -2,7 +2,7 @@ package com.brikelos.model.queries;
 
 import com.brikelos.model.Connection;
 import com.brikelos.model.models.Client;
-import com.brikelos.model.models.Sell;
+import com.brikelos.model.models.Purchase;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,21 +12,21 @@ public class SellQueries extends Connection {
 
     /**
      * Adds a new purchase to the database.
-     * @param sell
+     * @param purchase
      * @return
      */
-    public static boolean addSell(Sell sell) {
+    public static boolean addSell(Purchase purchase) {
         java.sql.Connection connection = connect();
         try {
             connection.createStatement().execute(
                     "INSERT INTO Sells (title, date, description, price, buyerID) VALUES (" +
-                    "'" + sell.getTitle()       + "'," +
-                    "'" + sell.getDate()        + "'," +
-                    "'" + sell.getDescription() + "'," +
-                          sell.getPrice()       + ","  +
-                          sell.getBuyerID()     + ");"
+                    "'" + purchase.getTitle()       + "'," +
+                    "'" + purchase.getDate()        + "'," +
+                    "'" + purchase.getDescription() + "'," +
+                          purchase.getPrice()       + ","  +
+                          purchase.getBuyerID()     + ");"
             );
-            ClientQueries.setMoneySpent(sell.getBuyerID(), sell.getPrice());
+            ClientQueries.setMoneySpent(purchase.getBuyerID(), purchase.getPrice());
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -46,15 +46,16 @@ public class SellQueries extends Connection {
      * @param client
      * @return
      */
-    public static ArrayList<Sell> getAllClientSells(Client client) {
+    public static ArrayList<Purchase> getAllClientSells(Client client) {
         java.sql.Connection connection = connect();
-        ArrayList<Sell> purchases = new ArrayList<>();
+        ArrayList<Purchase> purchases = new ArrayList<>();
         try {
             ResultSet res = connection.createStatement().executeQuery(
                     "SELECT * FROM Sells WHERE (buyerID=" + client.getId() + ")"
             );
             while(res.next()) {
-                purchases.add(new Sell(
+                purchases.add(new Purchase(
+                        res.getInt("id"),
                         client.getId(),
                         res.getString("date"),
                         res.getString("title"),
@@ -73,6 +74,29 @@ public class SellQueries extends Connection {
             }
         }
         return null;
+    }
+
+    public static void modifySellInfo(int purchaseID, Purchase modifiedPurchase) {
+        java.sql.Connection connection = connect();
+        try {
+            connection.createStatement().execute(
+                    "UPDATE Sells SET title='" + modifiedPurchase.getTitle() + "' WHERE id=" + purchaseID + ";"
+            );
+            connection.createStatement().execute(
+                    "UPDATE Sells SET description='" + modifiedPurchase.getDescription() + "' WHERE id=" + purchaseID + ";"
+            );
+            connection.createStatement().execute(
+                    "UPDATE Sells SET price=" + modifiedPurchase.getPrice() + " WHERE id=" + purchaseID + ";"
+            );
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 }

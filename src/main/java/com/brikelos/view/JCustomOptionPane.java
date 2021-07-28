@@ -1,12 +1,11 @@
 package com.brikelos.view;
 
-import com.brikelos.model.models.Sell;
+import com.brikelos.model.models.Purchase;
 import com.brikelos.model.queries.ClientQueries;
 
 import javax.swing.*;
 import javax.swing.plaf.FontUIResource;
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.Arrays;
 
 public class JCustomOptionPane {
@@ -51,12 +50,12 @@ public class JCustomOptionPane {
 
     /**
      * Confirm dialog for the purchase.
-     * @param sell
+     * @param purchase
      * @return
      */
-    public static int confirmDialog(Sell sell) {
+    public static int confirmDialog(Purchase purchase) {
         String description = "";
-        for(String s: Arrays.asList(sell.getDescription().split("\\r?\\n"))) {
+        for(String s: Arrays.asList(purchase.getDescription().split("\\r?\\n"))) {
             if(s.length() > 80) {
                 int index = 0;
                 while (index < s.length()) {
@@ -70,10 +69,10 @@ public class JCustomOptionPane {
 
         String txt =
                 "<html><b>¿Son correctos estos datos de la venta?</b><br><br>"          +
-                "<b>Fecha</b>: "       + sell.getDate()                                 + "<br>" +
-                "<b>Comprador</b>: "   + ClientQueries.getClientById(sell.getBuyerID()) + "<br>" +
-                "<b>Precio</b>: "      + sell.getPrice()                                + "<br>" +
-                "<b>Título</b>: "      + sell.getTitle()                                + "<br>" +
+                "<b>Fecha</b>: "       + purchase.getDate()                                 + "<br>" +
+                "<b>Comprador</b>: "   + ClientQueries.getClientById(purchase.getBuyerID()) + "<br>" +
+                "<b>Precio</b>: "      + purchase.getPrice()                                + "<br>" +
+                "<b>Título</b>: "      + purchase.getTitle()                                + "<br>" +
                 "<b>Descripción</b>: <br>" + description                                + "</html>";
 
         Object[] options = { "Si", "No", "Cancelar" };

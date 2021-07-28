@@ -1,7 +1,7 @@
 package com.brikelos.controller;
 
 import com.brikelos.model.queries.ClientQueries;
-import com.brikelos.model.models.Sell;
+import com.brikelos.model.models.Purchase;
 import com.brikelos.model.queries.ConfigQueries;
 import com.brikelos.model.queries.SellQueries;
 import com.brikelos.util.GUIHandler;
@@ -11,8 +11,6 @@ import com.brikelos.view.JCustomOptionPane;
 import javax.swing.*;
 import java.awt.event.*;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 
 public class AddSellController implements ActionListener, KeyListener {
@@ -56,7 +54,7 @@ public class AddSellController implements ActionListener, KeyListener {
                 );
             } else {
                 int clientID = ClientQueries.getIdByName(view.clientList.getSelectedValue().toString());
-                Sell sell = new Sell(
+                Purchase purchase = new Purchase(
                         clientID,
                         view.sellDate.getText(),
                         view.sellTitle.getText(),
@@ -65,14 +63,14 @@ public class AddSellController implements ActionListener, KeyListener {
                 );
 
                 int reply = JCustomOptionPane.confirmDialog(
-                        sell
+                        purchase
                 );
 
                 if(reply == JOptionPane.YES_OPTION) {
                     double sellPrice        = Double.parseDouble(view.sellPrice.getText());
                     double clientMoneySpent = ClientQueries.getTotalSpent(ClientQueries.getClientByName(view.clientList.getSelectedValue().toString()));
 
-                    boolean success = SellQueries.addSell(sell);
+                    boolean success = SellQueries.addSell(purchase);
                     JCustomOptionPane.messageDialog(
                             (success) ? "La venta de '" + view.sellTitle.getText() + "' fue guardada correctamente." : "Error al agregar cliente.",
                             (success) ? "Venta guardada." : "ERROR",
