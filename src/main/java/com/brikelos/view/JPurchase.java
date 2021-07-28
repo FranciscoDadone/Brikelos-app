@@ -3,7 +3,6 @@ package com.brikelos.view;
 import com.brikelos.controller.DeletePurchase;
 import com.brikelos.controller.EditPurchase;
 import com.brikelos.model.models.Purchase;
-
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -51,9 +50,10 @@ public class JPurchase extends JPanel {
 
         buttons = new JPanel();
 
+
         editBtn = new JButton("Editar");
         editBtn.setFont(font);
-        deleteBtn = new JButton("Eliminar️");
+        deleteBtn = new JButton("Eliminar");
         deleteBtn.setFont(font);
 
         buttons.setLayout(new FlowLayout(FlowLayout.RIGHT));
