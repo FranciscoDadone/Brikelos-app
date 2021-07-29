@@ -5,7 +5,7 @@ import java.io.File;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class Connection {
+public class SQLiteConnection {
     /**
      * Connects to the database.
      *

@@ -1,12 +1,12 @@
 package com.brikelos.model.queries;
 
-import com.brikelos.model.Connection;
+import com.brikelos.model.SQLiteConnection;
 import com.brikelos.model.models.Config;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ConfigQueries extends Connection {
+public class ConfigQueries extends SQLiteConnection {
 
     /**
      * Sets the money when the alert will trigger.

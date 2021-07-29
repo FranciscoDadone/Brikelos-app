@@ -1,7 +1,13 @@
 package com.brikelos;
 
+import ch.qos.logback.classic.Logger;
+import com.brikelos.model.mongo.MongoCredentials;
 import com.brikelos.util.GUIHandler;
+import com.brikelos.util.MongoBackup;
 import com.brikelos.util.Util;
+import ch.qos.logback.classic.Level;
+import ch.qos.logback.classic.LoggerContext;
+import org.slf4j.LoggerFactory;
 
 public class main {
 
@@ -14,7 +20,13 @@ public class main {
             e.printStackTrace();
         }
 
+        // Disabling all the logging in mongo connection
+        LoggerContext loggerContext = (LoggerContext) LoggerFactory.getILoggerFactory();
+        Logger rootLogger = loggerContext.getLogger("org.mongodb.driver");
+        rootLogger.setLevel(Level.OFF);
+
         GUIHandler.main();
+        MongoBackup.Backup();
 
     }
 }

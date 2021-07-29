@@ -1,13 +1,13 @@
 package com.brikelos.model.queries;
 
-import com.brikelos.model.Connection;
+import com.brikelos.model.SQLiteConnection;
 import com.brikelos.model.models.Client;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class ClientQueries extends Connection {
+public class ClientQueries extends SQLiteConnection {
 
     public static boolean addClient(Client client) {
         java.sql.Connection connection = connect();

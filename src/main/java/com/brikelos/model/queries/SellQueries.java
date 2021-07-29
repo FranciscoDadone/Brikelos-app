@@ -1,6 +1,6 @@
 package com.brikelos.model.queries;
 
-import com.brikelos.model.Connection;
+import com.brikelos.model.SQLiteConnection;
 import com.brikelos.model.models.Client;
 import com.brikelos.model.models.Purchase;
 
@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class SellQueries extends Connection {
+public class SellQueries extends SQLiteConnection {
 
     /**
      * Adds a new purchase to the database.
