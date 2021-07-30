@@ -3,6 +3,7 @@ package com.brikelos.controller;
 import com.brikelos.model.models.Purchase;
 import com.brikelos.model.queries.ClientQueries;
 import com.brikelos.model.queries.SellQueries;
+import com.brikelos.util.MongoBackup;
 import com.brikelos.view.JCustomOptionPane;
 import com.brikelos.view.ShowClientsPanel;
 
@@ -35,6 +36,7 @@ public class DeleteClient implements ActionListener {
             }
 
             ClientQueries.deleteClient(Cache.selectedClient);
+            MongoBackup.deleteClient(Cache.selectedClient);
             Cache.selectedClient = null;
             ShowClientsController.displayClientInfo(null);
             ShowClientsController.bindData();

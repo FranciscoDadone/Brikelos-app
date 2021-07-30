@@ -1,7 +1,5 @@
 package com.brikelos.model.models;
 
-import com.brikelos.model.queries.ClientQueries;
-
 public class Client {
 
     public Client(String name, String phone, double moneySpent) {

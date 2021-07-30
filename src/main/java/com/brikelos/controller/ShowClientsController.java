@@ -4,6 +4,7 @@ import com.brikelos.model.models.Client;
 import com.brikelos.model.models.Purchase;
 import com.brikelos.model.queries.ClientQueries;
 import com.brikelos.model.queries.SellQueries;
+import com.brikelos.util.MongoBackup;
 import com.brikelos.util.Util;
 import com.brikelos.view.JCustomOptionPane;
 import com.brikelos.view.JLabelFont;
@@ -136,6 +137,9 @@ public class ShowClientsController implements KeyListener, MouseListener, Action
                     view.clientName.setText("Nombre: " + Cache.selectedClient.getName());
                     view.clientPhone.setText("Tel.: " + Cache.selectedClient.getPhone());
                     view.clientTotalSpent.setText("Total gastado: $" + Cache.selectedClient.getMoneySpent());
+
+                    MongoBackup.editClient(Cache.selectedClient);
+
                 } else {
                     JCustomOptionPane.messageDialog(
                             "Error, el monto de dinero tiene que ser numérico.",
