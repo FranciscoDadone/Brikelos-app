@@ -112,7 +112,7 @@ public class AddSellController implements ActionListener, KeyListener {
      */
     public void bindData() {
         ClientQueries.getAllClients().forEach((client) -> {
-            defaultListModel.addElement(client);
+            if(!client.isDeleted()) defaultListModel.addElement(client);
         });
         view.clientList.setModel(defaultListModel);
         view.clientList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -126,9 +126,11 @@ public class AddSellController implements ActionListener, KeyListener {
     private void searchFilter(String searchTerm) {
         DefaultListModel filteredItems = new DefaultListModel();
         ClientQueries.getAllClients().forEach((client) -> {
-            String name = client.getName().toLowerCase();
-            if(name.contains(searchTerm.toLowerCase())) {
-                filteredItems.addElement(client);
+            if(!client.isDeleted()) {
+                String name = client.getName().toLowerCase();
+                if(name.contains(searchTerm.toLowerCase())) {
+                    filteredItems.addElement(client);
+                }
             }
         });
         defaultListModel = filteredItems;

@@ -3,10 +3,17 @@ package com.brikelos.model.Remote.queries;
 import com.brikelos.model.Local.models.Client;
 import com.brikelos.model.Local.queries.ClientQueries;
 import com.brikelos.model.Remote.MongoConnection;
+import com.brikelos.view.JCustomOptionPane;
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Updates;
 import org.bson.Document;
 import org.bson.conversions.Bson;
+
+import javax.print.Doc;
+import javax.swing.*;
+
+import java.util.ArrayList;
 
 import static com.mongodb.client.model.Updates.set;
 
@@ -24,14 +31,50 @@ public class RemoteClientQueries {
     protected static void checkClientsData() {
         MongoConnection mongoConnection = new MongoConnection();
         System.out.println("Cheking clients on Mongo...");
-        ClientQueries.getAllClients().forEach((client) -> {
-            Document mongoQuery = (Document) mongoConnection.mongoClients.find(Filters.eq("name", client.getName())).first();
-            if(mongoQuery == null) {
-                backupClient(client);
-            }
-        });
 
+        long localRegisteredClients = ClientQueries.getAllClients().size();
+        long remoteRegisteredClients = getActiveMongoClients();
+
+        if(localRegisteredClients > remoteRegisteredClients) {
+            ClientQueries.getAllClients().forEach((client) -> {
+                Document mongoQuery = (Document) mongoConnection.mongoClients.find(Filters.eq("name", client.getName())).first();
+                if(mongoQuery == null) {
+                    backupClient(client);
+                }
+            });
+        } else if(localRegisteredClients == 0) {
+            int res = JCustomOptionPane.confirmDialog("<html>Se ha detectado que la base de datos local está desactualizada.<br>¿Desea actualizarla?</html>", "Actualizar base de datos");
+            if(res == JOptionPane.YES_OPTION) {
+                getAllClients().forEach((remoteClient) -> {
+                    ClientQueries.addClient(remoteClient);
+                });
+
+                ClientQueries.getAllClients().forEach((localClient) -> {
+                    updateClientID(localClient);
+                });
+
+                int res1 = JCustomOptionPane.confirmDialog("<html>Se ha recuperado la información de manera exitosa.<br>¿Desea reiniciar la aplicación para aplicar los cambios?</html>", "Reiniciar");
+                if(res1 == JOptionPane.YES_OPTION) {
+                    System.exit(0);
+                }
+            }
+        } else { // Equal: check deleted
+
+        }
         mongoConnection.close();
+    }
+
+    private static void updateClientID(Client client) {
+        System.out.println("Updating remote id of " + client.getName());
+        new Thread(() -> {
+            MongoConnection mongoConnection = new MongoConnection();
+
+            Bson filter = Filters.eq("name", client.getName());
+            Bson updateOperation = set("id", client.getId());
+            mongoConnection.mongoClients.updateOne(filter, updateOperation);
+
+            mongoConnection.close();
+        }).start();
     }
 
     public static void backupClient(Client client) {
@@ -77,6 +120,23 @@ public class RemoteClientQueries {
 
             mongoConnection.close();
         }).start();
+    }
+
+    private static ArrayList<Client> getAllClients() {
+        MongoConnection mongoConnection = new MongoConnection();
+        FindIterable remoteClients = mongoConnection.mongoClients.find(Filters.eq("deleted", false));
+
+        ArrayList<Client> clients = new ArrayList<>();
+        remoteClients.forEach((client) -> {
+            clients.add(new Client(
+                    ((Document)client).getString("name"),
+                    ((Document)client).getString("phone"),
+                    ((Document)client).getDouble("moneySpent")
+            ));
+        });
+
+        mongoConnection.close();
+        return clients;
     }
 
 }

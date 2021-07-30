@@ -1,12 +1,18 @@
 package com.brikelos;
 
 import ch.qos.logback.classic.Logger;
+import com.brikelos.model.Local.queries.ClientQueries;
+import com.brikelos.model.Local.queries.GlobalQueries;
 import com.brikelos.util.GUIHandler;
 import com.brikelos.model.Remote.queries.MongoBackup;
 import com.brikelos.util.Util;
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.LoggerContext;
 import org.slf4j.LoggerFactory;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class main {
 
@@ -25,6 +31,10 @@ public class main {
         rootLogger.setLevel(Level.OFF);
 
         GUIHandler.main();
+
+        GlobalQueries.checkTableUpdateClients();
+        GlobalQueries.checkTableUpdateSells();
+
         MongoBackup.Backup();
 
     }

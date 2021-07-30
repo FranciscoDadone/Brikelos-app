@@ -15,10 +15,8 @@ public class ClientQueries extends SQLiteConnection {
             connection.createStatement().execute(
                     "INSERT INTO Clients (name, phone, moneySpent) VALUES (" +
                             "'" + client.getName()  + "', " +
-//                                + client.getDni()   + ", "  +
                             "'" + client.getPhone() + "', " +
-//                            "'" + client.getEmail() + "', " +
-                            "0" +
+                            client.getMoneySpent() +
                             ");"
             );
         } catch (SQLException e1) {
@@ -48,10 +46,9 @@ public class ClientQueries extends SQLiteConnection {
                 clients.add(new Client(
                         res.getInt("id"),
                         res.getString("name"),
-//                        res.getLong("dni"),
-//                        res.getString("email"),
                         res.getString("phone"),
-                        res.getDouble("moneySpent")
+                        res.getDouble("moneySpent"),
+                        res.getBoolean("deleted")
                 ));
             }
         } catch (SQLException e) {
@@ -130,7 +127,8 @@ public class ClientQueries extends SQLiteConnection {
                         res.getInt("id"),
                         res.getString("name"),
                         res.getString("phone"),
-                        res.getDouble("moneySpent")
+                        res.getDouble("moneySpent"),
+                        res.getBoolean("deleted")
                 );
             }
         } catch (SQLException e) {
@@ -195,7 +193,8 @@ public class ClientQueries extends SQLiteConnection {
                         res.getInt("id"),
                         res.getString("name"),
                         res.getString("phone"),
-                        res.getDouble("moneySpent")
+                        res.getDouble("moneySpent"),
+                        res.getBoolean("deleted")
                 );
             }
         } catch (SQLException e) {
@@ -237,7 +236,7 @@ public class ClientQueries extends SQLiteConnection {
         java.sql.Connection connection = connect();
         try {
             connection.createStatement().execute(
-                    "DELETE FROM Clients WHERE id=" + client.getId() + ";"
+                    "UPDATE Clients SET deleted=true WHERE id=" + client.getId() + ";"
             );
         } catch (SQLException e) {
             e.printStackTrace();

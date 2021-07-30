@@ -31,8 +31,8 @@ public class ShowClientsController implements KeyListener, MouseListener, Action
     public static void bindData() {
         defaultListModel.removeAllElements();
         view.listOfClients.removeAll();
-        ClientQueries.getAllClients().stream().forEach((star) -> {
-            defaultListModel.addElement(star);
+        ClientQueries.getAllClients().stream().forEach((client) -> {
+            if(!client.isDeleted()) defaultListModel.addElement(client);
         });
         view.listOfClients.setModel(defaultListModel);
         view.listOfClients.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -41,13 +41,14 @@ public class ShowClientsController implements KeyListener, MouseListener, Action
     private void searchFilter(String searchTerm) {
         DefaultListModel filteredItems = new DefaultListModel();
 
-        ClientQueries.getAllClients().stream().forEach((star) -> {
-            String starName = star.toString().toLowerCase();
+        ClientQueries.getAllClients().stream().forEach((client) -> {
+            if(!client.isDeleted()) {
+                String starName = client.toString().toLowerCase();
 
-            if(starName.contains(searchTerm.toLowerCase())) {
-                filteredItems.addElement(star);
+                if(starName.contains(searchTerm.toLowerCase())) {
+                    filteredItems.addElement(client);
+                }
             }
-
         });
         defaultListModel = filteredItems;
         view.listOfClients.setModel(defaultListModel);
