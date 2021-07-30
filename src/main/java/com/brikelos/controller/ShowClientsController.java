@@ -68,13 +68,15 @@ public class ShowClientsController implements KeyListener, MouseListener, Action
 
                 AtomicInteger i = new AtomicInteger();
                 clientPurchases.forEach((purchase) -> {
-                    i.getAndIncrement();
-                    view.purchasesPanel.add(
-                            new JPurchase(
-                                    i.get(),
-                                    purchase
-                            )
-                    );
+                    if(!purchase.isDeleted()) {
+                        i.getAndIncrement();
+                        view.purchasesPanel.add(
+                                new JPurchase(
+                                        i.get(),
+                                        purchase
+                                )
+                        );
+                    }
                 });
                 view.editClientBtn.setEnabled(true);
                 view.deleteClient.setEnabled(true);

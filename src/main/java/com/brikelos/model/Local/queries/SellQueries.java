@@ -19,12 +19,12 @@ public class SellQueries extends SQLiteConnection {
         java.sql.Connection connection = connect();
         try {
             connection.createStatement().execute(
-                    "INSERT INTO Sells (title, date, description, price, buyerID) VALUES (" +
+                    "INSERT INTO Sells (title, date, description, price, buyerID, deleted) VALUES (" +
                     "'" + purchase.getTitle()       + "'," +
                     "'" + purchase.getDate()        + "'," +
                     "'" + purchase.getDescription() + "'," +
                           purchase.getPrice()       + ","  +
-                          purchase.getBuyerID()     + ");"
+                          purchase.getBuyerID()     + ", 0);"
             );
             ClientQueries.setMoneySpent(purchase.getBuyerID(), purchase.getPrice());
             return true;
@@ -60,7 +60,8 @@ public class SellQueries extends SQLiteConnection {
                         res.getString("date"),
                         res.getString("title"),
                         res.getString("description"),
-                        res.getDouble("price")
+                        res.getDouble("price"),
+                        res.getBoolean("deleted")
                 ));
             }
             return purchases;
@@ -103,7 +104,7 @@ public class SellQueries extends SQLiteConnection {
         java.sql.Connection connection = connect();
         try {
             connection.createStatement().execute(
-                    "DELETE FROM Sells WHERE id=" + purchase.getId() + ";"
+                    "UPDATE Sells SET deleted=true WHERE id=" + purchase.getId() + ";"
             );
 
         } catch (SQLException e) {

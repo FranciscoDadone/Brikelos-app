@@ -59,7 +59,8 @@ public class AddSellController implements ActionListener, KeyListener {
                         view.sellDate.getText(),
                         view.sellTitle.getText(),
                         view.sellDescription.getText(),
-                        Double.parseDouble(view.sellPrice.getText())
+                        Double.parseDouble(view.sellPrice.getText()),
+                        false
                 );
 
                 int reply = JCustomOptionPane.confirmDialog(

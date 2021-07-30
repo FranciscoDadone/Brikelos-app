@@ -13,11 +13,11 @@ public class ClientQueries extends SQLiteConnection {
         java.sql.Connection connection = connect();
         try {
             connection.createStatement().execute(
-                    "INSERT INTO Clients (name, phone, moneySpent) VALUES (" +
+                    "INSERT INTO Clients (name, phone, moneySpent, deleted) VALUES (" +
                             "'" + client.getName()  + "', " +
                             "'" + client.getPhone() + "', " +
                             client.getMoneySpent() +
-                            ");"
+                            ", 0);"
             );
         } catch (SQLException e1) {
             e1.printStackTrace();
