@@ -2,7 +2,7 @@ package com.brikelos.view;
 
 import com.brikelos.controller.DeletePurchase;
 import com.brikelos.controller.EditPurchase;
-import com.brikelos.model.models.Purchase;
+import com.brikelos.model.Local.models.Purchase;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;

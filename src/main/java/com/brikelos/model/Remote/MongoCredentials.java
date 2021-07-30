@@ -1,4 +1,4 @@
-package com.brikelos.model.mongo;
+package com.brikelos.model.Remote;
 
 import org.yaml.snakeyaml.Yaml;
 

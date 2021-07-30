@@ -1,6 +1,6 @@
 package com.brikelos.controller;
 
-import com.brikelos.model.queries.ConfigQueries;
+import com.brikelos.model.Local.queries.ConfigQueries;
 import com.brikelos.util.GUIHandler;
 import com.brikelos.view.*;
 

@@ -1,21 +1,18 @@
 package com.brikelos.controller;
 
-import com.brikelos.model.models.Purchase;
-import com.brikelos.model.queries.ClientQueries;
-import com.brikelos.model.queries.SellQueries;
-import com.brikelos.util.GUIHandler;
+import com.brikelos.model.Local.models.Purchase;
+import com.brikelos.model.Local.queries.ClientQueries;
+import com.brikelos.model.Local.queries.SellQueries;
 import com.brikelos.util.Util;
 import com.brikelos.view.JCustomOptionPane;
 import com.brikelos.view.JLabelFont;
 import com.brikelos.view.JPurchase;
-import com.brikelos.view.ShowClientsPanel;
 
 import javax.swing.*;
 import javax.swing.plaf.FontUIResource;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Arrays;
 
 public class EditPurchase implements ActionListener {
     public EditPurchase(Purchase purchase, JPurchase panel) {

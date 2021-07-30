@@ -1,4 +1,4 @@
-package com.brikelos.model;
+package com.brikelos.model.Local;
 
 import javax.swing.filechooser.FileSystemView;
 import java.io.File;

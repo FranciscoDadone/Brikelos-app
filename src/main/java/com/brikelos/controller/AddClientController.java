@@ -1,10 +1,10 @@
 package com.brikelos.controller;
 
-import com.brikelos.model.models.Client;
-import com.brikelos.model.mongo.MongoConnection;
-import com.brikelos.model.queries.ClientQueries;
+import com.brikelos.model.Local.models.Client;
+import com.brikelos.model.Local.queries.ClientQueries;
+import com.brikelos.model.Remote.queries.RemoteClientQueries;
 import com.brikelos.util.GUIHandler;
-import com.brikelos.util.MongoBackup;
+import com.brikelos.model.Remote.queries.MongoBackup;
 import com.brikelos.view.AddClientPanel;
 import com.brikelos.view.JCustomOptionPane;
 
@@ -67,7 +67,7 @@ public class AddClientController implements ActionListener {
                             (success) ? JOptionPane.INFORMATION_MESSAGE : JOptionPane.ERROR_MESSAGE
                     );
                     if(success) {
-                        MongoBackup.backupClient(client);
+                        RemoteClientQueries.backupClient(client);
                     }
                     GUIHandler.changeScreen(new AddClientPanel().getPanel());
                 }

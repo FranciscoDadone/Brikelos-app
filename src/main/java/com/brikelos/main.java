@@ -1,9 +1,8 @@
 package com.brikelos;
 
 import ch.qos.logback.classic.Logger;
-import com.brikelos.model.mongo.MongoCredentials;
 import com.brikelos.util.GUIHandler;
-import com.brikelos.util.MongoBackup;
+import com.brikelos.model.Remote.queries.MongoBackup;
 import com.brikelos.util.Util;
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.LoggerContext;

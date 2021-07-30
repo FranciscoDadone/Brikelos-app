@@ -1,4 +1,4 @@
-package com.brikelos.model.mongo;
+package com.brikelos.model.Remote;
 
 import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;

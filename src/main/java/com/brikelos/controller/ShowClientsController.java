@@ -1,10 +1,11 @@
 package com.brikelos.controller;
 
-import com.brikelos.model.models.Client;
-import com.brikelos.model.models.Purchase;
-import com.brikelos.model.queries.ClientQueries;
-import com.brikelos.model.queries.SellQueries;
-import com.brikelos.util.MongoBackup;
+import com.brikelos.model.Local.models.Client;
+import com.brikelos.model.Local.models.Purchase;
+import com.brikelos.model.Local.queries.ClientQueries;
+import com.brikelos.model.Local.queries.SellQueries;
+import com.brikelos.model.Remote.queries.MongoBackup;
+import com.brikelos.model.Remote.queries.RemoteClientQueries;
 import com.brikelos.util.Util;
 import com.brikelos.view.JCustomOptionPane;
 import com.brikelos.view.JLabelFont;
@@ -138,7 +139,7 @@ public class ShowClientsController implements KeyListener, MouseListener, Action
                     view.clientPhone.setText("Tel.: " + Cache.selectedClient.getPhone());
                     view.clientTotalSpent.setText("Total gastado: $" + Cache.selectedClient.getMoneySpent());
 
-                    MongoBackup.editClient(Cache.selectedClient);
+                    RemoteClientQueries.editClient(Cache.selectedClient);
 
                 } else {
                     JCustomOptionPane.messageDialog(

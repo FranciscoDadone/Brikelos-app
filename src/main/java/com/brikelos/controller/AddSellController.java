@@ -1,9 +1,9 @@
 package com.brikelos.controller;
 
-import com.brikelos.model.queries.ClientQueries;
-import com.brikelos.model.models.Purchase;
-import com.brikelos.model.queries.ConfigQueries;
-import com.brikelos.model.queries.SellQueries;
+import com.brikelos.model.Local.queries.ClientQueries;
+import com.brikelos.model.Local.models.Purchase;
+import com.brikelos.model.Local.queries.ConfigQueries;
+import com.brikelos.model.Local.queries.SellQueries;
 import com.brikelos.util.GUIHandler;
 import com.brikelos.util.Util;
 import com.brikelos.view.AddSellPanel;

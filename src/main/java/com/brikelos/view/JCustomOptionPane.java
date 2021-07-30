@@ -1,7 +1,7 @@
 package com.brikelos.view;
 
-import com.brikelos.model.models.Purchase;
-import com.brikelos.model.queries.ClientQueries;
+import com.brikelos.model.Local.models.Purchase;
+import com.brikelos.model.Local.queries.ClientQueries;
 
 import javax.swing.*;
 import javax.swing.plaf.FontUIResource;

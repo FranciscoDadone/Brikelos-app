@@ -1,6 +1,6 @@
 package com.brikelos.controller;
 
-import com.brikelos.model.models.Client;
+import com.brikelos.model.Local.models.Client;
 
 public class Cache {
 

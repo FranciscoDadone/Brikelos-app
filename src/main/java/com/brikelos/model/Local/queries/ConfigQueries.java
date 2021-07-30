@@ -1,7 +1,7 @@
-package com.brikelos.model.queries;
+package com.brikelos.model.Local.queries;
 
-import com.brikelos.model.SQLiteConnection;
-import com.brikelos.model.models.Config;
+import com.brikelos.model.Local.SQLiteConnection;
+import com.brikelos.model.Local.models.Config;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
