@@ -9,8 +9,6 @@ import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Updates;
 import org.bson.Document;
 import org.bson.conversions.Bson;
-
-import javax.print.Doc;
 import javax.swing.*;
 
 import java.util.ArrayList;
@@ -35,14 +33,14 @@ public class RemoteClientQueries {
         long localRegisteredClients = ClientQueries.getAllClients().size();
         long remoteRegisteredClients = getActiveMongoClients();
 
-        if(localRegisteredClients > remoteRegisteredClients) {
+        if(localRegisteredClients > remoteRegisteredClients) { // makes the backup un remote
             ClientQueries.getAllClients().forEach((client) -> {
                 Document mongoQuery = (Document) mongoConnection.mongoClients.find(Filters.eq("name", client.getName())).first();
                 if(mongoQuery == null) {
                     backupClient(client);
                 }
             });
-        } else if(localRegisteredClients == 0) {
+        } else if(localRegisteredClients == 0) { // if the local database is empty, retrieves from remote
             int res = JCustomOptionPane.confirmDialog("<html>Se ha detectado que la base de datos local está desactualizada.<br>¿Desea actualizarla?</html>", "Actualizar base de datos");
             if(res == JOptionPane.YES_OPTION) {
                 getAllClients().forEach((remoteClient) -> {
@@ -58,9 +56,19 @@ public class RemoteClientQueries {
                     System.exit(0);
                 }
             }
-        } else { // Equal: check deleted
-
         }
+
+        ArrayList<Client> remoteClients = getAllClients();
+        for(Client localClient : ClientQueries.getAllClients()) {
+            if(remoteClients.contains(localClient)) break;
+            for(Client remoteClient : remoteClients) {
+                if(localClient.getId() == remoteClient.getId()) {
+                    editClient(localClient);
+                    break;
+                }
+            }
+        }
+
         mongoConnection.close();
     }
 
@@ -129,9 +137,11 @@ public class RemoteClientQueries {
         ArrayList<Client> clients = new ArrayList<>();
         remoteClients.forEach((client) -> {
             clients.add(new Client(
+                    ((Document)client).getInteger("id"),
                     ((Document)client).getString("name"),
                     ((Document)client).getString("phone"),
-                    ((Document)client).getDouble("moneySpent")
+                    ((Document)client).getDouble("moneySpent"),
+                    ((Document)client).getBoolean("deleted")
             ));
         });
 
