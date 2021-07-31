@@ -3,6 +3,7 @@ package com.brikelos.controller;
 import com.brikelos.model.Local.models.Purchase;
 import com.brikelos.model.Local.queries.ClientQueries;
 import com.brikelos.model.Local.queries.SellQueries;
+import com.brikelos.model.Remote.queries.RemoteSellsQueries;
 import com.brikelos.util.Util;
 import com.brikelos.view.JCustomOptionPane;
 import com.brikelos.view.JLabelFont;
@@ -63,6 +64,7 @@ public class EditPurchase implements ActionListener {
 
                 SellQueries.modifySellInfo(purchase.getId(), purchase);
                 ShowClientsController.displayClientInfo(Cache.selectedClient);
+                RemoteSellsQueries.editSell(purchase);
 
             } else {
                 JCustomOptionPane.messageDialog(

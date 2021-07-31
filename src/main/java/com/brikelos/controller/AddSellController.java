@@ -4,6 +4,7 @@ import com.brikelos.model.Local.queries.ClientQueries;
 import com.brikelos.model.Local.models.Purchase;
 import com.brikelos.model.Local.queries.ConfigQueries;
 import com.brikelos.model.Local.queries.SellQueries;
+import com.brikelos.model.Remote.queries.RemoteSellsQueries;
 import com.brikelos.util.GUIHandler;
 import com.brikelos.util.Util;
 import com.brikelos.view.AddSellPanel;
@@ -71,13 +72,13 @@ public class AddSellController implements ActionListener, KeyListener {
                     double sellPrice        = Double.parseDouble(view.sellPrice.getText());
                     double clientMoneySpent = ClientQueries.getTotalSpent(ClientQueries.getClientByName(view.clientList.getSelectedValue().toString()));
 
-                    boolean success = SellQueries.addSell(purchase);
+                    int sellID = SellQueries.addSell(purchase);
                     JCustomOptionPane.messageDialog(
-                            (success) ? "La venta de '" + view.sellTitle.getText() + "' fue guardada correctamente." : "Error al agregar cliente.",
-                            (success) ? "Venta guardada." : "ERROR",
-                            (success) ? JOptionPane.INFORMATION_MESSAGE : JOptionPane.ERROR_MESSAGE
+                            (sellID != -1) ? "La venta de '" + view.sellTitle.getText() + "' fue guardada correctamente." : "Error al agregar cliente.",
+                            (sellID != -1) ? "Venta guardada." : "ERROR",
+                            (sellID != -1) ? JOptionPane.INFORMATION_MESSAGE : JOptionPane.ERROR_MESSAGE
                     );
-                    if(success) {
+                    if(sellID != -1) {
                         double moneyAlertTrigger = ConfigQueries.getConfig().getMoneyAlert();
                         if((clientMoneySpent + sellPrice) >= moneyAlertTrigger) {
                             JCustomOptionPane.messageDialog(
@@ -102,6 +103,7 @@ public class AddSellController implements ActionListener, KeyListener {
                             );
                         }
                         GUIHandler.changeScreen(new AddSellPanel().getPanel());
+                        RemoteSellsQueries.backupSell(new Purchase(sellID, purchase));
                     }
                 }
             }

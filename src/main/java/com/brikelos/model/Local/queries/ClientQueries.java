@@ -248,4 +248,24 @@ public class ClientQueries extends SQLiteConnection {
             }
         }
     }
+
+    public static long getActiveClients() {
+        java.sql.Connection connection = connect();
+        long count = 0;
+        try {
+            ResultSet res = connection.createStatement().executeQuery("SELECT * FROM Clients WHERE deleted=false;");
+            while(res.next()) {
+                count++;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return count;
+    }
 }

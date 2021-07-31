@@ -26,14 +26,14 @@ public class RemoteClientQueries {
         return count;
     }
 
-    protected static void checkClientsData() {
+    protected static boolean isDatabaseOutdated() {
         MongoConnection mongoConnection = new MongoConnection();
         System.out.println("Cheking clients on Mongo...");
 
-        long localRegisteredClients = ClientQueries.getAllClients().size();
+        long localRegisteredClients = ClientQueries.getActiveClients();
         long remoteRegisteredClients = getActiveMongoClients();
 
-        if(localRegisteredClients > remoteRegisteredClients) { // makes the backup un remote
+        if(localRegisteredClients > remoteRegisteredClients) { // makes the backup on remote
             ClientQueries.getAllClients().forEach((client) -> {
                 Document mongoQuery = (Document) mongoConnection.mongoClients.find(Filters.eq("name", client.getName())).first();
                 if(mongoQuery == null) {
@@ -41,21 +41,7 @@ public class RemoteClientQueries {
                 }
             });
         } else if(localRegisteredClients == 0) { // if the local database is empty, retrieves from remote
-            int res = JCustomOptionPane.confirmDialog("<html>Se ha detectado que la base de datos local está desactualizada.<br>¿Desea actualizarla?</html>", "Actualizar base de datos");
-            if(res == JOptionPane.YES_OPTION) {
-                getAllClients().forEach((remoteClient) -> {
-                    ClientQueries.addClient(remoteClient);
-                });
-
-                ClientQueries.getAllClients().forEach((localClient) -> {
-                    updateClientID(localClient);
-                });
-
-                int res1 = JCustomOptionPane.confirmDialog("<html>Se ha recuperado la información de manera exitosa.<br>¿Desea reiniciar la aplicación para aplicar los cambios?</html>", "Reiniciar");
-                if(res1 == JOptionPane.YES_OPTION) {
-                    System.exit(0);
-                }
-            }
+            return true;
         }
 
         ArrayList<Client> remoteClients = getAllClients();
@@ -63,13 +49,35 @@ public class RemoteClientQueries {
             if(remoteClients.contains(localClient)) break;
             for(Client remoteClient : remoteClients) {
                 if(localClient.getId() == remoteClient.getId()) {
-                    editClient(localClient);
+                    if(!localClient.getName().equals(remoteClient.getName()) ||
+                            localClient.isDeleted() != remoteClient.isDeleted() ||
+                            localClient.getMoneySpent() != remoteClient.getMoneySpent() ||
+                            !localClient.getPhone().equals(remoteClient.getPhone())) {
+                        editClient(localClient);
+                    }
                     break;
                 }
             }
         }
 
         mongoConnection.close();
+        return false;
+    }
+
+    public static void retrieveFromRemote() {
+        getAllClients().forEach((remoteClient) -> {
+            System.out.println("Restoring client " + remoteClient.getName() + " from remote.");
+            ClientQueries.addClient(remoteClient);
+        });
+
+        ClientQueries.getAllClients().forEach((localClient) -> {
+            updateClientID(localClient);
+        });
+
+        int res1 = JCustomOptionPane.confirmDialog("<html>Se ha recuperado la información de manera exitosa.<br>¿Desea reiniciar la aplicación para aplicar los cambios?</html>", "Reiniciar");
+        if(res1 == JOptionPane.YES_OPTION) {
+            System.exit(0);
+        }
     }
 
     private static void updateClientID(Client client) {
@@ -94,7 +102,7 @@ public class RemoteClientQueries {
                     .append("name", client.getName())
                     .append("phone", client.getPhone())
                     .append("moneySpent", client.getMoneySpent())
-                    .append("deleted", false)
+                    .append("deleted", client.isDeleted())
             );
             mongoConnection.close();
         }).start();
@@ -122,7 +130,8 @@ public class RemoteClientQueries {
             Bson updateName = set("name", client.getName());
             Bson updatePhone = set("phone", client.getPhone());
             Bson updateMoneySpent = set("moneySpent", client.getMoneySpent());
-            Bson updates = Updates.combine(updateName, updatePhone, updateMoneySpent);
+            Bson updateDeleted = set("deleted", client.isDeleted());
+            Bson updates = Updates.combine(updateName, updatePhone, updateMoneySpent, updateDeleted);
 
             mongoConnection.mongoClients.updateOne(filter, updates);
 

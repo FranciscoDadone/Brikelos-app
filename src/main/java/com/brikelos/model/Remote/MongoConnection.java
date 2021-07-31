@@ -27,7 +27,7 @@ public class MongoConnection {
         }
 
         if(connected) {
-            System.out.println("Connected to mongoDB!");
+//            System.out.println("Connected to mongoDB!");
             mongoDatabase  = database;
             mongoClients = mongoDatabase.getCollection("Clients");
             mongoSells   = mongoDatabase.getCollection("Sells");
@@ -43,7 +43,7 @@ public class MongoConnection {
 
     public void close() {
         mongoClient.close();
-        System.out.println("Mongo connection closed.");
+//        System.out.println("Mongo connection closed.");
     }
 
     private MongoClient         mongoClient;

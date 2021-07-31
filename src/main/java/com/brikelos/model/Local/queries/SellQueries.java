@@ -15,7 +15,7 @@ public class SellQueries extends SQLiteConnection {
      * @param purchase
      * @return
      */
-    public static boolean addSell(Purchase purchase) {
+    public static int addSell(Purchase purchase) {
         java.sql.Connection connection = connect();
         try {
             connection.createStatement().execute(
@@ -27,16 +27,21 @@ public class SellQueries extends SQLiteConnection {
                           purchase.getBuyerID()     + ", 0);"
             );
             ClientQueries.setMoneySpent(purchase.getBuyerID(), purchase.getPrice());
-            return true;
+
+            ResultSet res = connection.createStatement().executeQuery("SELECT * FROM Sells WHERE (title='" + purchase.getTitle() + "' AND " +
+                    "date='" + purchase.getDate() + "' AND " +
+                    "description='" + purchase.getDescription() + "' AND " +
+                    "price=" + purchase.getPrice() + ");");
+            return res.getInt("id");
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
+            return -1;
         } finally {
             try {
                 connection.close();
             } catch (SQLException e) {
                 e.printStackTrace();
-                return false;
+                return -1;
             }
         }
     }
@@ -117,4 +122,57 @@ public class SellQueries extends SQLiteConnection {
             }
         }
     }
+
+    public static ArrayList<Purchase> getAllSells() {
+
+        java.sql.Connection connection = connect();
+        ArrayList<Purchase> purchases = new ArrayList<>();
+        try {
+            ResultSet res = connection.createStatement().executeQuery(
+                    "SELECT * FROM Sells;"
+            );
+            while(res.next()) {
+                purchases.add(new Purchase(
+                        res.getInt("id"),
+                        res.getInt("buyerID"),
+                        res.getString("date"),
+                        res.getString("title"),
+                        res.getString("description"),
+                        res.getDouble("price"),
+                        res.getBoolean("deleted")
+                ));
+            }
+            return purchases;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+    public static long getActiveSells() {
+        java.sql.Connection connection = connect();
+        long count = 0;
+        try {
+            ResultSet res = connection.createStatement().executeQuery("SELECT * FROM Sells WHERE deleted=false;");
+            while(res.next()) {
+                count++;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return count;
+    }
+
 }

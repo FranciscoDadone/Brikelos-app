@@ -3,6 +3,7 @@ package com.brikelos.controller;
 import com.brikelos.model.Local.models.Purchase;
 import com.brikelos.model.Local.queries.ClientQueries;
 import com.brikelos.model.Local.queries.SellQueries;
+import com.brikelos.model.Remote.queries.RemoteSellsQueries;
 import com.brikelos.view.JCustomOptionPane;
 
 import javax.swing.*;
@@ -23,6 +24,7 @@ public class DeletePurchase implements ActionListener {
 
         if(res == JOptionPane.YES_OPTION) {
             SellQueries.deletePurchase(purchase);
+            RemoteSellsQueries.deleteSell(purchase);
 
             double purchasePrice = purchase.getPrice();
             double clientMoney = ClientQueries.getClientById(purchase.getBuyerID()).getMoneySpent();

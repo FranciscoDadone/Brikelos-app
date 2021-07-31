@@ -3,7 +3,6 @@ package com.brikelos.controller;
 import com.brikelos.model.Local.models.Purchase;
 import com.brikelos.model.Local.queries.ClientQueries;
 import com.brikelos.model.Local.queries.SellQueries;
-import com.brikelos.model.Remote.queries.MongoBackup;
 import com.brikelos.model.Remote.queries.RemoteClientQueries;
 import com.brikelos.view.JCustomOptionPane;
 import com.brikelos.view.ShowClientsPanel;

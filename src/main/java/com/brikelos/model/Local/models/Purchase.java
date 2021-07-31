@@ -20,6 +20,16 @@ public class Purchase {
         this.deleted     = deleted;
     }
 
+    public Purchase(int id, Purchase purchase) {
+        this.id          = id;
+        this.buyerID     = purchase.buyerID;
+        this.date        = purchase.date;
+        this.title       = purchase.title;
+        this.description = purchase.description;
+        this.price       = purchase.price;
+        this.deleted     = purchase.deleted;
+    }
+
     public int getId() {
         return id;
     }
