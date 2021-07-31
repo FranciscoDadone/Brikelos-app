@@ -40,7 +40,7 @@ public class RemoteSellsQueries {
                     backupSell(sell);
                 }
             });
-        } else if(localRegisteredSells == 0) { // if the local database is empty, retrieves from remote
+        } else if(localRegisteredSells == 0 && localRegisteredSells != remoteRegisteredSells) { // if the local database is empty, retrieves from remote
             return true;
         }
 
@@ -75,11 +75,6 @@ public class RemoteSellsQueries {
         SellQueries.getAllSells().forEach((localSell) -> {
             updateSellID(localSell);
         });
-
-        int res1 = JCustomOptionPane.confirmDialog("<html>Se ha recuperado la información de manera exitosa.<br>¿Desea reiniciar la aplicación para aplicar los cambios?</html>", "Reiniciar");
-        if(res1 == JOptionPane.YES_OPTION) {
-            System.exit(0);
-        }
     }
 
     private static void updateSellID(Purchase sell) {

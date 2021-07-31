@@ -2,25 +2,12 @@ package com.brikelos.model.Local.models;
 
 public class Client {
 
-    public Client(String name, String phone, double moneySpent) {
-        this.name       = name;
-        this.phone      = phone;
-        this.moneySpent = moneySpent;
-        deleted = false;
-    }
-
     public Client(int id, String name, String phone, double moneySpent, boolean deleted) {
         this.id         = id;
         this.name       = name;
         this.phone      = phone;
         this.moneySpent = moneySpent;
         this.deleted = deleted;
-    }
-
-    public Client(String name, String phone) {
-        this.name  = name;
-        this.phone = phone;
-        deleted = false;
     }
 
     @Override

@@ -4,6 +4,7 @@ import com.brikelos.model.Local.queries.ClientQueries;
 import com.brikelos.model.Local.models.Purchase;
 import com.brikelos.model.Local.queries.ConfigQueries;
 import com.brikelos.model.Local.queries.SellQueries;
+import com.brikelos.model.Remote.queries.RemoteClientQueries;
 import com.brikelos.model.Remote.queries.RemoteSellsQueries;
 import com.brikelos.util.GUIHandler;
 import com.brikelos.util.Util;
@@ -104,6 +105,7 @@ public class AddSellController implements ActionListener, KeyListener {
                         }
                         GUIHandler.changeScreen(new AddSellPanel().getPanel());
                         RemoteSellsQueries.backupSell(new Purchase(sellID, purchase));
+                        RemoteClientQueries.editClient(ClientQueries.getClientById(clientID));
                     }
                 }
             }

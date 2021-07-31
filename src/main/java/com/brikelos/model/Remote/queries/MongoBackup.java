@@ -21,7 +21,12 @@ public class MongoBackup {
                 int res = JCustomOptionPane.confirmDialog("<html>Se ha detectado que la base de datos local está desactualizada.<br>¿Desea actualizarla?</html>", "Actualizar base de datos");
                 if(res == JOptionPane.YES_OPTION) {
                     if(isClientsOutdated) RemoteClientQueries.retrieveFromRemote();
-                    if(isSellsOutdated) RemoteSellsQueries.retrieveFromRemote();
+                    if(isSellsOutdated)   RemoteSellsQueries.retrieveFromRemote();
+
+                    int res1 = JCustomOptionPane.confirmDialog("<html>Se ha recuperado la información de manera exitosa.<br>¿Desea reiniciar la aplicación para aplicar los cambios?</html>", "Reiniciar");
+                    if(res1 == JOptionPane.YES_OPTION) {
+                        System.exit(0);
+                    }
                 }
             }
         }

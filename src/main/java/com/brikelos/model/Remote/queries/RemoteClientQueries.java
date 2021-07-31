@@ -3,13 +3,11 @@ package com.brikelos.model.Remote.queries;
 import com.brikelos.model.Local.models.Client;
 import com.brikelos.model.Local.queries.ClientQueries;
 import com.brikelos.model.Remote.MongoConnection;
-import com.brikelos.view.JCustomOptionPane;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Updates;
 import org.bson.Document;
 import org.bson.conversions.Bson;
-import javax.swing.*;
 
 import java.util.ArrayList;
 
@@ -30,7 +28,7 @@ public class RemoteClientQueries {
         MongoConnection mongoConnection = new MongoConnection();
         System.out.println("Cheking clients on Mongo...");
 
-        long localRegisteredClients = ClientQueries.getActiveClients();
+        long localRegisteredClients  = ClientQueries.getActiveClients();
         long remoteRegisteredClients = getActiveMongoClients();
 
         if(localRegisteredClients > remoteRegisteredClients) { // makes the backup on remote
@@ -40,7 +38,7 @@ public class RemoteClientQueries {
                     backupClient(client);
                 }
             });
-        } else if(localRegisteredClients == 0) { // if the local database is empty, retrieves from remote
+        } else if(localRegisteredClients == 0 && localRegisteredClients != remoteRegisteredClients) { // if the local database is empty, retrieves from remote
             return true;
         }
 
@@ -66,18 +64,13 @@ public class RemoteClientQueries {
 
     public static void retrieveFromRemote() {
         getAllClients().forEach((remoteClient) -> {
-            System.out.println("Restoring client " + remoteClient.getName() + " from remote.");
+            System.out.println("Restoring client " + remoteClient.getName() + " from remote. " + remoteClient.getMoneySpent());
             ClientQueries.addClient(remoteClient);
         });
 
         ClientQueries.getAllClients().forEach((localClient) -> {
             updateClientID(localClient);
         });
-
-        int res1 = JCustomOptionPane.confirmDialog("<html>Se ha recuperado la información de manera exitosa.<br>¿Desea reiniciar la aplicación para aplicar los cambios?</html>", "Reiniciar");
-        if(res1 == JOptionPane.YES_OPTION) {
-            System.exit(0);
-        }
     }
 
     private static void updateClientID(Client client) {

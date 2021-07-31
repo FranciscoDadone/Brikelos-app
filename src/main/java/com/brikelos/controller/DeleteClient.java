@@ -4,6 +4,7 @@ import com.brikelos.model.Local.models.Purchase;
 import com.brikelos.model.Local.queries.ClientQueries;
 import com.brikelos.model.Local.queries.SellQueries;
 import com.brikelos.model.Remote.queries.RemoteClientQueries;
+import com.brikelos.model.Remote.queries.RemoteSellsQueries;
 import com.brikelos.view.JCustomOptionPane;
 import com.brikelos.view.ShowClientsPanel;
 
@@ -32,6 +33,7 @@ public class DeleteClient implements ActionListener {
             if(!purchases.isEmpty()) {
                 purchases.forEach((purchase) -> {
                     SellQueries.deletePurchase(purchase);
+                    RemoteSellsQueries.deleteSell(purchase);
                 });
             }
 

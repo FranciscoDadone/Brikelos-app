@@ -29,8 +29,10 @@ public class AddClientController implements ActionListener {
                     JOptionPane.WARNING_MESSAGE
             );
         } else {
-            Client client = new Client(view.nameAndSurname.getText(),
-                    view.phoneNum.getText()
+            Client client = new Client(0, view.nameAndSurname.getText(),
+                    view.phoneNum.getText(),
+                    0,
+                    false
             );
             String error = "";
 

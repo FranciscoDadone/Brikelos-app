@@ -1,8 +1,10 @@
 package com.brikelos.controller;
 
+import com.brikelos.model.Local.models.Client;
 import com.brikelos.model.Local.models.Purchase;
 import com.brikelos.model.Local.queries.ClientQueries;
 import com.brikelos.model.Local.queries.SellQueries;
+import com.brikelos.model.Remote.queries.RemoteClientQueries;
 import com.brikelos.model.Remote.queries.RemoteSellsQueries;
 import com.brikelos.view.JCustomOptionPane;
 
@@ -31,6 +33,9 @@ public class DeletePurchase implements ActionListener {
             double newBal = Math.abs(clientMoney - purchasePrice);
 
             ClientQueries.setMoneySpent(purchase.getBuyerID(), newBal);
+
+            RemoteClientQueries.editClient(ClientQueries.getClientById(purchase.getBuyerID()));
+
             ShowClientsController.displayClientInfo(Cache.selectedClient);
         }
     }

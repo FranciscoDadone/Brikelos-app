@@ -26,7 +26,7 @@ public class SellQueries extends SQLiteConnection {
                           purchase.getPrice()       + ","  +
                           purchase.getBuyerID()     + ", 0);"
             );
-            ClientQueries.setMoneySpent(purchase.getBuyerID(), purchase.getPrice());
+//            ClientQueries.setMoneySpent(purchase.getBuyerID(), purchase.getPrice());
 
             ResultSet res = connection.createStatement().executeQuery("SELECT * FROM Sells WHERE (title='" + purchase.getTitle() + "' AND " +
                     "date='" + purchase.getDate() + "' AND " +
