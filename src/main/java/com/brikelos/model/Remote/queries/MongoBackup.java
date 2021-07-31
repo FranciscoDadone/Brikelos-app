@@ -8,7 +8,11 @@ import javax.swing.*;
 public class MongoBackup {
 
     public static void Backup() {
-        new MongoConnection().close();
+        try {
+            new MongoConnection().close();
+        } catch (Exception e) {
+            System.out.println("Please fill up the MongoDB credentials under Brikelos/database/mongoCrendentials.yml to backup the data! Or check your internet connection!");
+        }
         if(MongoStatus.connected) {
             RemoteGlobalQueries.checkCollections();
 
