@@ -33,6 +33,7 @@ public class MongoCredentials {
 
         if(isNew) {
             Map<String, Object> dataMap = new HashMap<>();
+            dataMap.put("url", "");
             dataMap.put("password", "");
             dataMap.put("username", "");
 
